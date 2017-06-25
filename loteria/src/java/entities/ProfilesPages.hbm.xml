@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-jun-2017 14:24:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.ProfilesPages" table="PROFILES_PAGES" schema="LOTERIA" optimistic-lock="version">
+        <id name="id" type="big_decimal">
+            <column name="ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="pages" class="entities.Pages" fetch="select">
+            <column name="PAGES_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="profiles" class="entities.Profiles" fetch="select">
+            <column name="PROFILES_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

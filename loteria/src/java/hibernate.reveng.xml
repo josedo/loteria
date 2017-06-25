@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-schema="LOTERIA"/>
+  <table-filter match-name="TRANSACTIONS"/>
+  <table-filter match-name="RECHARGES"/>
+  <table-filter match-name="USERS"/>
+  <table-filter match-name="DRAFTS"/>
+  <table-filter match-name="PROFILES"/>
+  <table-filter match-name="PAYMENT"/>
+  <table-filter match-name="PROFILES_PAGES"/>
+  <table-filter match-name="WINNERS"/>
+  <table-filter match-name="PAGES"/>
+  <table-filter match-name="TICKETS"/>
+</hibernate-reverse-engineering>

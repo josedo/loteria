@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-jun-2017 14:24:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Transactions" table="TRANSACTIONS" schema="LOTERIA" optimistic-lock="version">
+        <id name="id" type="big_decimal">
+            <column name="ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="paymentMethod" type="string">
+            <column name="PAYMENT_METHOD" length="50" not-null="true" />
+        </property>
+        <property name="amount" type="big_decimal">
+            <column name="AMOUNT" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

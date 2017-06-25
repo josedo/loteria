@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-jun-2017 14:24:33 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Tickets" table="TICKETS" schema="LOTERIA" optimistic-lock="version">
+        <id name="id" type="big_decimal">
+            <column name="ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="drafts" class="entities.Drafts" fetch="select">
+            <column name="DRAFTS_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="payment" class="entities.Payment" fetch="select">
+            <column name="PAYMENT_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="users" class="entities.Users" fetch="select">
+            <column name="USERS_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="number1" type="big_decimal">
+            <column name="NUMBER_1" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="number2" type="big_decimal">
+            <column name="NUMBER_2" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="number3" type="big_decimal">
+            <column name="NUMBER_3" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="number4" type="big_decimal">
+            <column name="NUMBER_4" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="number5" type="big_decimal">
+            <column name="NUMBER_5" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="number6" type="big_decimal">
+            <column name="NUMBER_6" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
