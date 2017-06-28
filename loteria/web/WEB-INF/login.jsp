@@ -43,16 +43,16 @@
         </div>
         <!-- /.register-box -->
         <!-- jQuery 2.1.4 -->
-        <script src="resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <script src="/loteria/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
         <!-- Bootstrap 3.3.5 -->
-        <script src="resources/bootstrap/js/bootstrap.min.js"></script>
-        <script src="resources/plugins/pace/pace.js"></script>
+        <script src="/loteria/resources/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/loteria/resources/plugins/pace/pace.js"></script>
         <!-- iCheck -->
-        <script src="resources/plugins/iCheck/icheck.min.js"></script>
+        <script src="/loteria/resources/plugins/iCheck/icheck.min.js"></script>
         <!-- SweetAlert -->
-        <script src="resources/plugins/sweetalert/sweetalert.min.js"></script>
+        <script src="/loteria/resources/plugins/sweetalert/sweetalert.min.js"></script>
         <!-- page script -->
-        <script src="resources/dist/js/scripts.js"></script>
+        <script src="/loteria/resources/dist/js/scripts.js"></script>
 
 
     </body>
