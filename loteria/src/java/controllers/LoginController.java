@@ -31,7 +31,7 @@ public class LoginController {
         this.users = new UsersModel();
     }
     
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"login.htm"}, method = RequestMethod.GET)
     public ModelAndView form(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException  {
         System.out.println("entra");

@@ -21,22 +21,22 @@
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- DataTables -->
-        <link rel="stylesheet" href="/integracion.java/resources/plugins/datatables/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="/loteria/resources/plugins/datatables/dataTables.bootstrap.css">
         <!-- Select2 -->
-        <link rel="stylesheet" href="/integracion.java/resources/plugins/select2/select2.min.css">
+        <link rel="stylesheet" href="/loteria/resources/plugins/select2/select2.min.css">
         <!-- SweetAlert -->
-        <link rel="stylesheet" href="/integracion.java/resources/plugins/sweetalert/sweetalert.css">
+        <link rel="stylesheet" href="/loteria/resources/plugins/sweetalert/sweetalert.css">
         <!-- daterange picker -->
-        <link rel="stylesheet" href="/integracion.java/resources/plugins/daterangepicker/daterangepicker-bs3.css">
+        <link rel="stylesheet" href="/loteria/resources/plugins/daterangepicker/daterangepicker-bs3.css">
         <!-- Bootstrap time Picker -->
-        <link rel="stylesheet" href="/integracion.java/resources/plugins/timepicker/bootstrap-timepicker.min.css">
+        <link rel="stylesheet" href="/loteria/resources/plugins/timepicker/bootstrap-timepicker.min.css">
         <!-- Theme style -->
-        <link rel="stylesheet" href="/integracion.java/resources/dist/css/AdminLTE.css">
+        <link rel="stylesheet" href="/loteria/resources/dist/css/AdminLTE.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of
               downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="/integracion.java/resources/dist/css/skins/_all-skins.min.css">
-        <link rel="stylesheet" href="/integracion.java/resources/plugins/pace/pace.min.css">
-        <link rel="stylesheet" href="/integracion.java/resources/plugins/iCheck/square/blue.css">
+        <link rel="stylesheet" href="/loteria/resources/dist/css/skins/_all-skins.min.css">
+        <link rel="stylesheet" href="/loteria/resources/plugins/pace/pace.min.css">
+        <link rel="stylesheet" href="/loteria/resources/plugins/iCheck/square/blue.css">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
               queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file://
