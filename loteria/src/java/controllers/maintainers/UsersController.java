@@ -26,12 +26,12 @@ public class UsersController {
         this.users = new UsersModel();
     }
     
-    
-    @RequestMapping(value = {"perfil.htm"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"mantenedores/usuarios.htm"}, method = RequestMethod.GET)
     public ModelAndView profile(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException  {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("perfil");
+        
+        mav.setViewName("maintainers/users/all");
         return mav;
     }
     

@@ -23,16 +23,21 @@ public class UsersModel extends Model {
     public UsersModel() {
     }
     
-    public List<Users>getAllUsers(){
-        List<Users> usersList = new LinkedList<>();
+    public List<Users> getAllUsers(){
+        List<Users> list = new LinkedList<>();
         try{
-            Transaction tx = session.beginTransaction();
-            usersList = session.createCriteria(Users.class).list();
-            tx.commit();            
-        }catch(HibernateException ex){
+            this.exceuteQueryList(new Callable<List<Object>>() {
+
+                @Override
+                public List<Object> call() throws Exception {
+                    return session.createCriteria(Users.class).list();
+                }
+                                
+            });           
+        }catch(Exception ex){
             ex.printStackTrace();
         }
-        return usersList;
+        return list;
     }
     
     public void createUsers(Users objUsers){        
@@ -69,37 +74,42 @@ public class UsersModel extends Model {
         
     }
     
-    public Users getUsers(int id){
-        Users objUsers = null;
-        Transaction tx = session.beginTransaction();
-        try{
-            objUsers = (Users) session.get(Users.class,id);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public Users getUsers(final int id){
+        Users user = null;
+        
+        try {
+            user = (Users) this.exceuteQuery(new Callable<Object>() {
+
+                @Override
+                public Users call() throws Exception {
+                    return (Users) session.get(Users.class, id);
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
-        return objUsers;
+        
+        return user;
     }
     
-    public Users authenticate(final String user, final String pass){
-        Users objUsers = null;
+    public Users authenticate(final String username, final String password){
+        Users user = null;
         try {
-            objUsers = (Users) this.exceuteQuery(new Callable<Object>() {
+            user = (Users) this.exceuteQuery(new Callable<Object>() {
 
                 @Override
                 public Users call() throws Exception {
                     String hql = "From Users as user Where user.username = :userName and user.password = :passWord";
                     Query query = session.createQuery(hql);
-                    query.setParameter("userName", user);
-                    query.setParameter("passWord", pass);
+                    query.setParameter("userName", username);
+                    query.setParameter("passWord", password);
                     return (Users) query.uniqueResult();
                 }
             });
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return objUsers;
+        return user;
     }
     
 }

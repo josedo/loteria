@@ -95,19 +95,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="./mantenedores/usuarios"><i class="fa fa-user"></i> Usuarios</a>
-                        </li>
-                        <li>
-                            <a href="./mantenedores/procesos"><i class="fa fa-table"></i> Procesos Electorales</a>
-                        </li>
-                        <li>
-                            <a href="./mantenedores/partidos"><i class="fa fa-columns"></i> Partidos Políticos</a>
-                        </li>
-                        <li>
-                            <a href="./mantenedores/padron"><i class="fa fa-list"></i> Padrón Electoral</a>
-                        </li>
-                        <li>
-                            <a href="./mantenedores/votantes"><i class="fa fa-hand-o-up"></i> Votantes</a>
+                            <a href="./mantenedores/usuarios.htm"><i class="fa fa-user"></i> Usuarios</a>
                         </li>
                     </ul>
                 </li>

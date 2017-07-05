@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -33,5 +35,19 @@ public class Model {
             this.session.getTransaction().rollback();
         }
         return object;
+    }
+    
+    protected List<Object> exceuteQueryList(Callable<List<Object>> query) throws Exception {
+        List<Object> list = new LinkedList<>();
+        this.setSession();
+        this.session.getTransaction().begin();
+        try {
+            list = query.call();
+            this.session.getTransaction().commit();
+        } catch(HibernateException ex) {
+            ex.printStackTrace();
+            this.session.getTransaction().rollback();
+        }
+        return list;
     }
 }

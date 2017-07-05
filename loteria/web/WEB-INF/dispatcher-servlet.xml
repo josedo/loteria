@@ -35,12 +35,20 @@
                 |
                 -->
                 <prop key="perfil.htm">profileController</prop>
+                
+                <!--
+                |
+                | Users Routes
+                |
+                -->
+                <prop key="mantenedores/usuarios.htm">usersController</prop>
             </props>
         </property>
     </bean>
     
     <bean name="loginController" class="controllers.LoginController"/>
     <bean name="profileController" class="controllers.ProfileController"/>
+    <bean name="usersController" class="controllers.maintainers.UsersController"/>
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
