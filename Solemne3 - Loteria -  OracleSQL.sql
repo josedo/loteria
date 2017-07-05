@@ -1,5 +1,5 @@
 --------------------------------------------------------
--- Archivo creado  - martes-julio-04-2017   
+-- Archivo creado  - miércoles-julio-05-2017   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence DRAFTS_SEQ
@@ -198,7 +198,10 @@
 	"FIRST_NAME" VARCHAR2(60 BYTE), 
 	"LAST_NAME" VARCHAR2(60 BYTE), 
 	"WALLET" NUMBER(*,0), 
-	"PROFILES_ID" NUMBER(*,0)
+	"PROFILES_ID" NUMBER(*,0), 
+	"RUT" NUMBER(10,0), 
+	"DV" VARCHAR2(1 BYTE), 
+	"EMAIL" VARCHAR2(60 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -243,10 +246,10 @@ SET DEFINE OFF;
 Insert into LOTERIA.TRANSACTIONS (ID,PAYMENT_METHOD,AMOUNT) values ('1','Tarjeta de Credito','500000');
 REM INSERTING into LOTERIA.USERS
 SET DEFINE OFF;
-Insert into LOTERIA.USERS (ID,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,WALLET,PROFILES_ID) values ('1','admin','admin','Administrador','Supremo','500000','1');
-Insert into LOTERIA.USERS (ID,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,WALLET,PROFILES_ID) values ('2','mleon','user1','Mario','Leon','0','2');
-Insert into LOTERIA.USERS (ID,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,WALLET,PROFILES_ID) values ('3','jbecerra','user2','Jose','Becerra','30000','2');
-Insert into LOTERIA.USERS (ID,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,WALLET,PROFILES_ID) values ('4','amontes','user3','Alexander','Montes','1200','2');
+Insert into LOTERIA.USERS (ID,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,WALLET,PROFILES_ID,RUT,DV,EMAIL) values ('1','admin','admin','Administrador','Supremo','500000','1','11111111','1','admin@loteria.net');
+Insert into LOTERIA.USERS (ID,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,WALLET,PROFILES_ID,RUT,DV,EMAIL) values ('2','mleon','user1','Mario','Leon','0','2','16752163','0','mleon@gmail.com');
+Insert into LOTERIA.USERS (ID,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,WALLET,PROFILES_ID,RUT,DV,EMAIL) values ('3','jbecerra','user2','Jose','Becerra','30000','2','22222222','2','jbecerra@gmail.com');
+Insert into LOTERIA.USERS (ID,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,WALLET,PROFILES_ID,RUT,DV,EMAIL) values ('4','amontes','user3','Alexander','Montes','1200','2','33333333','3','amontes@loteria.net');
 REM INSERTING into LOTERIA.WINNERS
 SET DEFINE OFF;
 --------------------------------------------------------
@@ -473,6 +476,9 @@ SET DEFINE OFF;
 --  Constraints for Table USERS
 --------------------------------------------------------
 
+  ALTER TABLE "LOTERIA"."USERS" MODIFY ("EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "LOTERIA"."USERS" MODIFY ("DV" NOT NULL ENABLE);
+  ALTER TABLE "LOTERIA"."USERS" MODIFY ("RUT" NOT NULL ENABLE);
   ALTER TABLE "LOTERIA"."USERS" ADD CONSTRAINT "USERS_PK" PRIMARY KEY ("ID")
   USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
