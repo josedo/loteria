@@ -35,6 +35,7 @@
                                         <th>Dinero</th>
                                         <th>Email</th>
                                         <th>Perfil</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -46,11 +47,13 @@
                                             <td>${user.rut} - ${user.dv}</td>
                                             <td>${user.wallet}</td>
                                             <td>${user.email}</td>
-                                            <td>perfil</td>
-                                            <td><span class="label label-${user.status==1?"success":"danger"}">${user.status==1?"Activo":"Inactivo"}</span></td>
+                                            <td>${user.profiles.name}</td>
+                                            <td>
+                                                <span class="label label-${user.status?"success":"danger"}">${user.status?"Activo":"Inactivo"}</span>
+                                            </td>
                                             <td>
                                                 <a class="btn btn-primary btn-xs btnEditar" data-id="${user.id}" data-url="./usuarios/update" data-original-title="Editar" data-toggle="tooltip"><i class="fa fa-pencil-square-o"></i></a>
-                                                <c:if test="${user.status==1}"><a class="btn btn-primary btn-xs btnEliminar" data-id="${user.id}" data-url="./update" data-original-title="Eliminar" data-toggle="tooltip"><i class="fa fa-times-circle"></i></a></c:if>
+                                                <c:if test="${user.status}"><a class="btn btn-primary btn-xs btnEliminar" data-id="${user.id}" data-url="./update" data-original-title="Eliminar" data-toggle="tooltip"><i class="fa fa-times-circle"></i></a></c:if>
                                             </td>
                                         </tr>
                                     </c:forEach>
