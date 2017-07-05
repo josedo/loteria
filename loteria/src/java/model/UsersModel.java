@@ -8,28 +8,26 @@ package model;
 import entities.Users;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Callable;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
  *
  * @author Joe
  */
-public class UsersModel {
+public class UsersModel extends Model {
     
-    private Session session;
 
     public UsersModel() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
     
     public List<Users>getAllUsers(){
         List<Users> usersList = new LinkedList<>();
         try{
             Transaction tx = session.beginTransaction();
-            usersList=session.createCriteria(Users.class).list();
+            usersList = session.createCriteria(Users.class).list();
             tx.commit();            
         }catch(HibernateException ex){
             ex.printStackTrace();
@@ -75,7 +73,7 @@ public class UsersModel {
         Users objUsers = null;
         Transaction tx = session.beginTransaction();
         try{
-            objUsers=(Users)session.get(Users.class,id);
+            objUsers = (Users) session.get(Users.class,id);
             tx.commit();            
         }catch(HibernateException ex){
             ex.printStackTrace();
@@ -84,20 +82,22 @@ public class UsersModel {
         return objUsers;
     }
     
-    public Users authenticate(String user, String pass){
+    public Users authenticate(final String user, final String pass){
         Users objUsers = null;
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.getTransaction().begin();
-        try{
-            String hql = "From Users as user Where user.username = :userName and user.password = :passWord";
-            Query query = this.session.createQuery(hql);
-            query.setParameter("userName", user);
-            query.setParameter("passWord", pass);
-            objUsers=(Users)query.uniqueResult();
-            session.getTransaction().commit();
-        }catch(HibernateException ex){
+        try {
+            objUsers = (Users) this.exceuteQuery(new Callable<Object>() {
+
+                @Override
+                public Users call() throws Exception {
+                    String hql = "From Users as user Where user.username = :userName and user.password = :passWord";
+                    Query query = session.createQuery(hql);
+                    query.setParameter("userName", user);
+                    query.setParameter("passWord", pass);
+                    return (Users) query.uniqueResult();
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            session.getTransaction().rollback();
         }
         return objUsers;
     }
