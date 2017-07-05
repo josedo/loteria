@@ -6,34 +6,35 @@
 package model;
 
 import entities.Profiles;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Callable;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
  *
  * @author Joe
  */
-public class ProfilesModel {
-    
-    private Session session;
+public class ProfilesModel extends Model {
 
     public ProfilesModel() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
     
-    public List<Profiles>getAllProfiles(){        
-        List<Profiles> profilesList=new LinkedList<>();
+    public List<Object> getAllProfiles(){   
+        List<Object> list = new LinkedList<>();
         try{
-            Transaction tx=session.beginTransaction();
-            profilesList=session.createCriteria(Profiles.class).list();
-            tx.commit();            
-        }catch(HibernateException ex){
+            list = this.executeQueryList(new Callable<List<Object>>() {
+                @Override
+                public List<Object> call() throws Exception {
+                    return session.createCriteria(Profiles.class).list();
+                }                
+            });           
+        }catch(Exception ex){
             ex.printStackTrace();
         }
-        return profilesList;
+        return list;
     }
     
     public void createProfiles(Profiles objProfiles){        
@@ -70,17 +71,21 @@ public class ProfilesModel {
         
     }
     
-    public Profiles getProfiles(int id){
-        Profiles objProfiles=null;
-        Transaction tx=session.beginTransaction();
-        try{
-            objProfiles=(Profiles)session.get(Profiles.class,id);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public Profiles getProfiles(final BigDecimal id){
+        Profiles profile = null;
+        
+        try {
+            profile = (Profiles) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Profiles call() throws Exception {
+                    return (Profiles) session.get(Profiles.class, id);
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
-        return objProfiles;
+        
+        return profile;
     }
     
 }

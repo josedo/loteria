@@ -160,8 +160,22 @@ public class Users  implements java.io.Serializable {
         this.winnerses = winnerses;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "{\"data\": {" + 
+                "\"id\": \"" + id.intValueExact() + '"' +
+                ",\"username\": \"" + username + '"' +
+                ",\"password\": \"" + password + '"' +
+                ",\"firstName\": \"" + firstName + '"' +
+                ",\"lastName\": \"" + lastName + '"' +
+                ",\"wallet\": \"" + wallet + '"' +
+                ",\"profile\": \"" + profiles.getId() + '"' +
+                ",\"rut\": \"" + rut + '"' +
+                ",\"dv\": \"" + dv + '"' +
+                ",\"email\": \"" + email + '"' +
+                ",\"status\": \"" + (status?1:0) + '"' +
+                "}}";
+    }
 
 }
 

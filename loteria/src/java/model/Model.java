@@ -20,7 +20,8 @@ public class Model {
     protected Session session;
     
     protected void setSession() {
-        this.session = HibernateUtil.getSessionFactory().openSession();
+        if (this.session == null || !this.session.isOpen())
+            this.session = HibernateUtil.getSessionFactory().openSession();
     }
     
     protected Object executeQuery(Callable<Object> query) throws Exception {

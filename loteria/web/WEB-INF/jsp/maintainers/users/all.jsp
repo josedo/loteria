@@ -52,8 +52,8 @@
                                                 <span class="label label-${user.status?"success":"danger"}">${user.status?"Activo":"Inactivo"}</span>
                                             </td>
                                             <td>
-                                                <a class="btn btn-primary btn-xs btnEditar" data-id="${user.id}" data-url="./usuarios/update" data-original-title="Editar" data-toggle="tooltip"><i class="fa fa-pencil-square-o"></i></a>
-                                                <c:if test="${user.status}"><a class="btn btn-primary btn-xs btnEliminar" data-id="${user.id}" data-url="./update" data-original-title="Eliminar" data-toggle="tooltip"><i class="fa fa-times-circle"></i></a></c:if>
+                                                <a class="btn btn-primary btn-xs btnEditar" data-id="${user.id}" data-url="./getUsuario.htm" data-original-title="Editar" data-toggle="tooltip"><i class="fa fa-pencil-square-o"></i></a>
+                                                <c:if test="${user.status}"><a class="btn btn-primary btn-xs btnEliminar" data-id="${user.id}" data-url="./deleteUsuario.htm" data-original-title="Eliminar" data-toggle="tooltip"><i class="fa fa-times-circle"></i></a></c:if>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -81,21 +81,33 @@
                         <form class="form-horizontal form" id="addForm">
                             <input class="form-control" name="id" id="id" type="hidden">
                             <div class="form-group">
-                                <label for="login" class="col-sm-2 control-label">Usuario</label>
+                                <label for="username" class="col-sm-2 control-label">Usuario</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="login" id="login" placeholder="Usuario" type="email" required="required">
+                                    <input class="form-control" name="username" id="username" placeholder="Usuario" type="email" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="pass" class="col-sm-2 control-label">Contraseña</label>
+                                <label for="password" class="col-sm-2 control-label">Contraseña</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" name="password" id="password" placeholder="Contraseña" type="password" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="firstName" class="col-sm-2 control-label">Nombre</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="firstName" id="firstName" placeholder="Nombre" type="text" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="col-sm-2 control-label">Apellido</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="lastName" id="lastName" placeholder="Apellido" type="text" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="name" id="name" placeholder="Nombre" type="text" required="required">
+                                    <input class="form-control" name="email" id="email" placeholder="Email" type="text" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -107,15 +119,22 @@
                             <div class="form-group">
                                 <label for="dv" class="col-sm-2 control-label">DV</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="dv" id="dv" placeholder="text" type="text" required="required">
+                                    <input class="form-control" name="dv" id="dv" placeholder="DV" type="text" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="wallet" class="col-sm-2 control-label">Dinero</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="wallet" id="wallet" placeholder="Ingrese monto" type="text" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="profile" class="col-sm-2 control-label">Perfil</label>
                                 <div class="col-sm-10">
                                     <select name="profile" id="profile" class="form-control" style="width: 100%;" required="required">
-                                        <option value="Administrador">Administrador</option>
-                                        <option value="Trabajador">Trabajador</option>
+                                        <c:forEach items="${profiles}" var="profile">
+                                            <option value="${profile.id}">${profile.name}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -132,7 +151,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="addNew" data-controller="usuarios" data-url="./usuarios">Guardar</button>
+                        <button type="button" class="btn btn-primary" id="addNew" data-controller="usuarios" data-url="./updateUsuario.htm">Guardar</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

@@ -15,45 +15,6 @@
         });
     }
 
-    $('#login').on('click', function (e) {
-        if (!sigecoApp.validForm())
-            return;
-        else {
-            var data = sigecoApp.dataFormMantenedor();
-            $.ajax({
-                url: 'valida.htm',
-                data: 'action=login' + data,
-                type: 'POST',
-                success: function (data) {
-                    if (data.response === 1) {
-                        swal({
-                            title: "Logeado!",
-                            text: "",
-                            type: "success"
-                        },
-                                function () {
-                                    window.location.replace('index.htm');
-                                });
-                    } else {
-                        swal({
-                            title: "Error al intentar logear!",
-                            text: "Intente nuevamente.",
-                            type: "error"
-                        });
-                    }
-                },
-                error: function () {
-                    swal({
-                        title: "Error al intentar logear!",
-                        text: "Intente nuevamente.",
-                        type: "error"
-                    });
-                }
-            });
-        }
-        e.preventDefault();
-    });
-
     $('#registra').on('click', function (e) {
         if (!sigecoApp.validForm())
             return;
@@ -210,7 +171,7 @@
                     } else {
                         swal({
                             title: "Error al guardar los datos!",
-                            text: "Intente nuevamente.",
+                            text: data.msg || "Intente nuevamente.",
                             type: "error"
                         });
                     }
@@ -265,7 +226,7 @@
                     } else {
                         swal({
                             title: "Error al eliminar el registro!",
-                            text: "Intente nuevamente.",
+                            text: data.msg || "Intente nuevamente.",
                             type: "error"
                         });
                     }
@@ -279,126 +240,6 @@
                 }
             });
         });
-    });
-
-    $('.btnRechazar').on('click', function () {
-        var id = $(this).attr('data-id');
-        var url = $(this).attr('data-url');
-        swal({
-            title: 'Rechazar Solicitud',
-            text: 'Está seguro que desea rechazar esta solicitud?',
-            type: "warning",
-            showCancelButton: true,
-            closeOnConfirm: false,
-            animation: 'slide-from-top',
-            showLoaderOnConfirm: true
-        },
-        function () {
-            $.ajax({
-                url: url,
-                data: 'id=' + id,
-                type: "POST",
-                success: function (data) {
-                    if (data.response === 1) {
-                        swal({
-                            title: "Solicitud rechazada!",
-                            text: "",
-                            type: "success"
-                        },
-                                function () {
-                                    location.reload();
-                                });
-                    } else {
-                        swal({
-                            title: "Error al rechazar la solicitud!",
-                            text: "Intente nuevamente.",
-                            type: "error"
-                        });
-                    }
-                },
-                error: function () {
-                    swal({
-                        title: "Error al rechazar la solicitud!",
-                        text: "Intente nuevamente.",
-                        type: "error"
-                    });
-                }
-            });
-        });
-    });
-
-    $('.btnAprobar').on('click', function () {
-        var id = $(this).attr('data-id');
-        var url = $(this).attr('data-url');
-        swal({
-            title: 'Aprobar Solicitud',
-            text: 'Está seguro que desea aprobar esta solicitud?',
-            type: "warning",
-            showCancelButton: true,
-            closeOnConfirm: false,
-            animation: 'slide-from-top',
-            showLoaderOnConfirm: true
-        },
-        function () {
-            $.ajax({
-                url: url,
-                data: 'id=' + id,
-                type: "POST",
-                success: function (data) {
-                    if (data.response === 1) {
-                        swal({
-                            title: "Solicitud aprobada!",
-                            text: "",
-                            type: "success"
-                        },
-                                function () {
-                                    location.reload();
-                                });
-                    } else {
-                        swal({
-                            title: "Error al aprobar la solicitud!",
-                            text: "Intente nuevamente.",
-                            type: "error"
-                        });
-                    }
-                },
-                error: function () {
-                    swal({
-                        title: "Error al aprobar la solicitud!",
-                        text: "Intente nuevamente.",
-                        type: "error"
-                    });
-                }
-            });
-        });
-    });
-    
-    $('#report-selector').select2().on('change', function() {
-        if (this.value > 0) {
-            $.ajax({
-                url: $(this).data('url'),
-                data: {id: this.value},
-                type: 'POST',
-                success: function (data) {
-                    if(data!=null){
-                        $('#report-table').html(data);
-                    } else {
-                        swal({
-                            title: "Error al bla!",
-                            text: "Intente nuevamente.",
-                            type: "error"
-                        });
-                    }
-                },
-                error: function () {
-                    swal({
-                        title: "Error al bla!",
-                        text: "Intente nuevamente.",
-                        type: "error"
-                    });
-                }
-            });
-        }
     });
 
     var sigecoApp = {
@@ -426,7 +267,7 @@
             $.ajax({
                 url: url,
                 data: 'id=' + id,
-                type: "GET",
+                type: "POST",
                 success: function (data) {
                     $('#addForm').find('.form-control').each(function () {
                         if ($(this).is('select'))

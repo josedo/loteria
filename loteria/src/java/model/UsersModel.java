@@ -6,6 +6,7 @@
 package model;
 
 import entities.Users;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -86,7 +87,7 @@ public class UsersModel extends Model {
         
     }
     
-    public Users getUsers(final int id){
+    public Users getUsers(final BigDecimal id){
         Users user = null;
         
         try {

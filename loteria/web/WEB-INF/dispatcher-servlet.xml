@@ -42,6 +42,9 @@
                 |
                 -->
                 <prop key="mantenedores/usuarios.htm">usersController</prop>
+                <prop key="mantenedores/getUsuario.htm">usersController</prop>
+                <prop key="mantenedores/updateUsuario.htm">usersController</prop>
+                <prop key="mantenedores/deleteUsuario.htm">usersController</prop>
             </props>
         </property>
     </bean>
