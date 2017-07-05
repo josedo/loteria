@@ -20,12 +20,27 @@
         <property name="mappings">
             <props>
                 <prop key="index.htm">indexController</prop>
+                <!--
+                |
+                | Login Routes
+                |
+                -->
                 <prop key="login.htm">loginController</prop>
+                <prop key="postLogin.htm">loginController</prop>
+                <prop key="salir.htm">loginController</prop>
+                
+                <!--
+                |
+                | Profile Routes
+                |
+                -->
+                <prop key="perfil.htm">profileController</prop>
             </props>
         </property>
     </bean>
     
     <bean name="loginController" class="controllers.LoginController"/>
+    <bean name="profileController" class="controllers.ProfileController"/>
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"

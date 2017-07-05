@@ -8,7 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="include/head.jsp" />
 <c:if test="${sessionScope.user!= null}">
-   <c:redirect url="./perfil"/>
+   <c:redirect url="./perfil.htm"/>
 </c:if>
     <body class="hold-transition login-page">
         <div class="login-box">
@@ -17,8 +17,8 @@
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
-                <p class="login-box-msg">Ingresar a SERVEL</p>
-                <form class="form" action="./login" method="POST">
+                <p class="login-box-msg">Ingresar a LOTERIA</p>
+                <form class="form" action="./postLogin.htm" method="POST">
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" placeholder="Ingrese usuario" id="login" name="login" required="required">
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>

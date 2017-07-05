@@ -25,10 +25,10 @@ public class UsersModel {
         this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
     
-    public List<Users>getAllUsers(){        
-        List<Users> usersList=new LinkedList<>();
+    public List<Users>getAllUsers(){
+        List<Users> usersList = new LinkedList<>();
         try{
-            Transaction tx=session.beginTransaction();
+            Transaction tx = session.beginTransaction();
             usersList=session.createCriteria(Users.class).list();
             tx.commit();            
         }catch(HibernateException ex){
@@ -38,7 +38,7 @@ public class UsersModel {
     }
     
     public void createUsers(Users objUsers){        
-        Transaction tx=session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         try{            
             session.save(objUsers);                 
         }catch(HibernateException ex){
@@ -49,7 +49,7 @@ public class UsersModel {
     }
     
     public void updateUsers(Users objUsers){        
-        Transaction tx=session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         try{            
             session.update(objUsers);
             tx.commit();            
@@ -60,7 +60,7 @@ public class UsersModel {
     }
     
     public void removeUsers(Users objUsers){        
-        Transaction tx=session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         try{            
             session.delete(objUsers);
             tx.commit();            
@@ -72,8 +72,8 @@ public class UsersModel {
     }
     
     public Users getUsers(int id){
-        Users objUsers=null;
-        Transaction tx=session.beginTransaction();
+        Users objUsers = null;
+        Transaction tx = session.beginTransaction();
         try{
             objUsers=(Users)session.get(Users.class,id);
             tx.commit();            
@@ -85,17 +85,19 @@ public class UsersModel {
     }
     
     public Users authenticate(String user, String pass){
-        Users objUsers=null;
-        Transaction tx=session.beginTransaction();
+        Users objUsers = null;
+        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.getTransaction().begin();
         try{
-            String hql="From Users as user Where user.USERNAME = :userName and user.PASSWORD = :passWord";
-            Query query=this.session.createQuery(hql);
+            String hql = "From Users as user Where user.username = :userName and user.password = :passWord";
+            Query query = this.session.createQuery(hql);
             query.setParameter("userName", user);
             query.setParameter("passWord", pass);
             objUsers=(Users)query.uniqueResult();
+            session.getTransaction().commit();
         }catch(HibernateException ex){
             ex.printStackTrace();
-            tx.rollback();
+            session.getTransaction().rollback();
         }
         return objUsers;
     }

@@ -1,11 +1,11 @@
 <%-- 
-    Document   : mantenedorCondominios
+    Document   : loteria
     Created on : 07-05-2016, 08:31:20 AM
     Author     : Joe-Xidu
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:Master>
@@ -20,17 +20,17 @@
             <div class="col-xs-3">
             	<div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img src="resources/dist/img/user2-160x160.jpg" class="profile-user-img img-responsive img-circle" alt="Usuario">
-                        <h3 class="profile-username text-center">${user.name}</h3>
-                        <p class="text-muted text-center">${user.profile}</p>
+                        <img src="/loteria/resources/dist/img/user2-160x160.jpg" class="profile-user-img img-responsive img-circle" alt="Usuario">
+                        <h3 class="profile-username text-center">${user.firstName}</h3>
+                        <p class="text-muted text-center">perfil</p>
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
-                                <b>Rut</b>
-                                <a class="pull-right">${user.rut}-${user.dv}</a>
+                                <b>Dinero</b>
+                                <a class="pull-right">${user.wallet}</a>
                             </li>
                             <li class="list-group-item">
                                 <b>Correo</b><br>
-                                <a class="email-large">${user.login}</a>
+                                <a class="email-large">${user.username}</a>
                             </li>
                         </ul>
                         <button id="change-password" class="btn btn-primary btn-block"><b>Cambiar Contraseña</b></button>

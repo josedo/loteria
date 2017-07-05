@@ -11,11 +11,11 @@
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
-        <a href="./perfil" class="logo">
+        <a href="./perfil.htm" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini">SERVEL</span>
+            <span class="logo-mini">LOTERIA</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b draggable="true">SERVEL</b></span>
+            <span class="logo-lg"><b draggable="true">LOTERIA</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -32,16 +32,16 @@
                     <!-- Control Sidebar Toggle Button -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/integracion.java/resources/dist/img/user2-160x160.jpg" class="user-image" alt="${user.login}">
-                            <span class="hidden-xs">${user.name}</span>
+                            <img src="/loteria/resources/dist/img/user2-160x160.jpg" class="user-image" alt="${user.username}">
+                            <span class="hidden-xs">${user.firstName}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="/integracion.java/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="${user.login}">
+                                <img src="/loteria/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="${user.username}">
                                 <p>
-                                    ${user.name}
-                                    <small>${user.login}</small>
+                                    ${user.firstName}
+                                    <small>${user.username}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -62,10 +62,10 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="/integracion.java/perfil" class="btn btn-default btn-flat">Perfil</a>
+                                    <a href="/loteria/perfil.htm" class="btn btn-default btn-flat">Perfil</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="/integracion.java/salir" class="btn btn-default btn-flat">Salir</a>
+                                    <a href="/loteria/salir.htm" class="btn btn-default btn-flat">Salir</a>
                                 </div>
                             </li>
                         </ul>
