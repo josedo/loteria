@@ -9,6 +9,7 @@ import entities.Users;
 import java.util.LinkedList;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -76,6 +77,22 @@ public class UsersModel {
         try{
             objUsers=(Users)session.get(Users.class,id);
             tx.commit();            
+        }catch(HibernateException ex){
+            ex.printStackTrace();
+            tx.rollback();
+        }
+        return objUsers;
+    }
+    
+    public Users authenticate(String user, String pass){
+        Users objUsers=null;
+        Transaction tx=session.beginTransaction();
+        try{
+            String hql="From Users as user Where user.USERNAME = :userName and user.PASSWORD = :passWord";
+            Query query=this.session.createQuery(hql);
+            query.setParameter("userName", user);
+            query.setParameter("passWord", pass);
+            objUsers=(Users)query.uniqueResult();
         }catch(HibernateException ex){
             ex.printStackTrace();
             tx.rollback();
