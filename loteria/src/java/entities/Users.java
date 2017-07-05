@@ -1,5 +1,5 @@
 package entities;
-// Generated 25-jun-2017 14:24:32 by Hibernate Tools 4.3.1
+// Generated 05-jul-2017 1:22:33 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -19,15 +19,18 @@ public class Users  implements java.io.Serializable {
      private String firstName;
      private String lastName;
      private BigDecimal wallet;
-     private Set winnerses = new HashSet(0);
+     private long rut;
+     private String dv;
+     private String email;
      private Set rechargeses = new HashSet(0);
      private Set ticketses = new HashSet(0);
+     private Set winnerses = new HashSet(0);
 
     public Users() {
     }
 
 	
-    public Users(BigDecimal id, Profiles profiles, String username, String password, String firstName, String lastName, BigDecimal wallet) {
+    public Users(BigDecimal id, Profiles profiles, String username, String password, String firstName, String lastName, BigDecimal wallet, long rut, String dv, String email) {
         this.id = id;
         this.profiles = profiles;
         this.username = username;
@@ -35,8 +38,11 @@ public class Users  implements java.io.Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.wallet = wallet;
+        this.rut = rut;
+        this.dv = dv;
+        this.email = email;
     }
-    public Users(BigDecimal id, Profiles profiles, String username, String password, String firstName, String lastName, BigDecimal wallet, Set winnerses, Set rechargeses, Set ticketses) {
+    public Users(BigDecimal id, Profiles profiles, String username, String password, String firstName, String lastName, BigDecimal wallet, long rut, String dv, String email, Set rechargeses, Set ticketses, Set winnerses) {
        this.id = id;
        this.profiles = profiles;
        this.username = username;
@@ -44,9 +50,12 @@ public class Users  implements java.io.Serializable {
        this.firstName = firstName;
        this.lastName = lastName;
        this.wallet = wallet;
-       this.winnerses = winnerses;
+       this.rut = rut;
+       this.dv = dv;
+       this.email = email;
        this.rechargeses = rechargeses;
        this.ticketses = ticketses;
+       this.winnerses = winnerses;
     }
    
     public BigDecimal getId() {
@@ -98,12 +107,26 @@ public class Users  implements java.io.Serializable {
     public void setWallet(BigDecimal wallet) {
         this.wallet = wallet;
     }
-    public Set getWinnerses() {
-        return this.winnerses;
+    public long getRut() {
+        return this.rut;
     }
     
-    public void setWinnerses(Set winnerses) {
-        this.winnerses = winnerses;
+    public void setRut(long rut) {
+        this.rut = rut;
+    }
+    public String getDv() {
+        return this.dv;
+    }
+    
+    public void setDv(String dv) {
+        this.dv = dv;
+    }
+    public String getEmail() {
+        return this.email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
     }
     public Set getRechargeses() {
         return this.rechargeses;
@@ -118,6 +141,13 @@ public class Users  implements java.io.Serializable {
     
     public void setTicketses(Set ticketses) {
         this.ticketses = ticketses;
+    }
+    public Set getWinnerses() {
+        return this.winnerses;
+    }
+    
+    public void setWinnerses(Set winnerses) {
+        this.winnerses = winnerses;
     }
 
 

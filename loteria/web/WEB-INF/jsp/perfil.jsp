@@ -22,7 +22,7 @@
                     <div class="box-body box-profile">
                         <img src="/loteria/resources/dist/img/user2-160x160.jpg" class="profile-user-img img-responsive img-circle" alt="Usuario">
                         <h3 class="profile-username text-center">${user.firstName}</h3>
-                        <p class="text-muted text-center">perfil</p>
+                        <p class="text-muted text-center">${user.firstName}</p>
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
                                 <b>Dinero</b>
@@ -30,7 +30,7 @@
                             </li>
                             <li class="list-group-item">
                                 <b>Correo</b><br>
-                                <a class="email-large">${user.username}</a>
+                                <a class="email-large">${user.email}</a>
                             </li>
                         </ul>
                         <button id="change-password" class="btn btn-primary btn-block"><b>Cambiar Contraseña</b></button>

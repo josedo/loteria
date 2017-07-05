@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 25-jun-2017 14:24:33 by Hibernate Tools 4.3.1 -->
+<!-- Generated 05-jul-2017 1:22:34 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entities.Users" table="USERS" schema="LOTERIA" optimistic-lock="version">
         <id name="id" type="big_decimal">
@@ -26,12 +26,15 @@
         <property name="wallet" type="big_decimal">
             <column name="WALLET" precision="22" scale="0" not-null="true" />
         </property>
-        <set name="winnerses" table="WINNERS" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="USERS_ID" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="entities.Winners" />
-        </set>
+        <property name="rut" type="long">
+            <column name="RUT" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="dv" type="string">
+            <column name="DV" length="1" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="60" not-null="true" />
+        </property>
         <set name="rechargeses" table="RECHARGES" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="USERS_ID" precision="22" scale="0" not-null="true" />
@@ -43,6 +46,12 @@
                 <column name="USERS_ID" precision="22" scale="0" not-null="true" />
             </key>
             <one-to-many class="entities.Tickets" />
+        </set>
+        <set name="winnerses" table="WINNERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USERS_ID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="entities.Winners" />
         </set>
     </class>
 </hibernate-mapping>

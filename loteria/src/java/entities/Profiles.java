@@ -1,5 +1,5 @@
 package entities;
-// Generated 25-jun-2017 14:24:32 by Hibernate Tools 4.3.1
+// Generated 05-jul-2017 1:22:33 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,8 +14,8 @@ public class Profiles  implements java.io.Serializable {
 
      private BigDecimal id;
      private String name;
-     private Set userses = new HashSet(0);
      private Set profilesPageses = new HashSet(0);
+     private Set userses = new HashSet(0);
 
     public Profiles() {
     }
@@ -25,11 +25,11 @@ public class Profiles  implements java.io.Serializable {
         this.id = id;
         this.name = name;
     }
-    public Profiles(BigDecimal id, String name, Set userses, Set profilesPageses) {
+    public Profiles(BigDecimal id, String name, Set profilesPageses, Set userses) {
        this.id = id;
        this.name = name;
-       this.userses = userses;
        this.profilesPageses = profilesPageses;
+       this.userses = userses;
     }
    
     public BigDecimal getId() {
@@ -46,19 +46,19 @@ public class Profiles  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public Set getUserses() {
-        return this.userses;
-    }
-    
-    public void setUserses(Set userses) {
-        this.userses = userses;
-    }
     public Set getProfilesPageses() {
         return this.profilesPageses;
     }
     
     public void setProfilesPageses(Set profilesPageses) {
         this.profilesPageses = profilesPageses;
+    }
+    public Set getUserses() {
+        return this.userses;
+    }
+    
+    public void setUserses(Set userses) {
+        this.userses = userses;
     }
 
 

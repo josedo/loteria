@@ -1,5 +1,5 @@
 package entities;
-// Generated 25-jun-2017 14:24:32 by Hibernate Tools 4.3.1
+// Generated 05-jul-2017 1:22:33 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -11,18 +11,18 @@ public class Recharges  implements java.io.Serializable {
 
 
      private BigDecimal id;
+     private Transactions transactions;
      private Users users;
      private BigDecimal amount;
-     private BigDecimal transactionsId;
 
     public Recharges() {
     }
 
-    public Recharges(BigDecimal id, Users users, BigDecimal amount, BigDecimal transactionsId) {
+    public Recharges(BigDecimal id, Transactions transactions, Users users, BigDecimal amount) {
        this.id = id;
+       this.transactions = transactions;
        this.users = users;
        this.amount = amount;
-       this.transactionsId = transactionsId;
     }
    
     public BigDecimal getId() {
@@ -31,6 +31,13 @@ public class Recharges  implements java.io.Serializable {
     
     public void setId(BigDecimal id) {
         this.id = id;
+    }
+    public Transactions getTransactions() {
+        return this.transactions;
+    }
+    
+    public void setTransactions(Transactions transactions) {
+        this.transactions = transactions;
     }
     public Users getUsers() {
         return this.users;
@@ -45,13 +52,6 @@ public class Recharges  implements java.io.Serializable {
     
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
-    }
-    public BigDecimal getTransactionsId() {
-        return this.transactionsId;
-    }
-    
-    public void setTransactionsId(BigDecimal transactionsId) {
-        this.transactionsId = transactionsId;
     }
 
 

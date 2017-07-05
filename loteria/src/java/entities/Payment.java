@@ -1,5 +1,5 @@
 package entities;
-// Generated 25-jun-2017 14:24:32 by Hibernate Tools 4.3.1
+// Generated 05-jul-2017 1:22:33 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -13,25 +13,25 @@ public class Payment  implements java.io.Serializable {
 
 
      private BigDecimal id;
+     private Transactions transactions;
      private BigDecimal noTickets;
      private BigDecimal amount;
-     private BigDecimal transactionsId;
      private Set ticketses = new HashSet(0);
 
     public Payment() {
     }
 
 	
-    public Payment(BigDecimal id, BigDecimal noTickets, BigDecimal transactionsId) {
+    public Payment(BigDecimal id, Transactions transactions, BigDecimal noTickets) {
         this.id = id;
+        this.transactions = transactions;
         this.noTickets = noTickets;
-        this.transactionsId = transactionsId;
     }
-    public Payment(BigDecimal id, BigDecimal noTickets, BigDecimal amount, BigDecimal transactionsId, Set ticketses) {
+    public Payment(BigDecimal id, Transactions transactions, BigDecimal noTickets, BigDecimal amount, Set ticketses) {
        this.id = id;
+       this.transactions = transactions;
        this.noTickets = noTickets;
        this.amount = amount;
-       this.transactionsId = transactionsId;
        this.ticketses = ticketses;
     }
    
@@ -41,6 +41,13 @@ public class Payment  implements java.io.Serializable {
     
     public void setId(BigDecimal id) {
         this.id = id;
+    }
+    public Transactions getTransactions() {
+        return this.transactions;
+    }
+    
+    public void setTransactions(Transactions transactions) {
+        this.transactions = transactions;
     }
     public BigDecimal getNoTickets() {
         return this.noTickets;
@@ -55,13 +62,6 @@ public class Payment  implements java.io.Serializable {
     
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
-    }
-    public BigDecimal getTransactionsId() {
-        return this.transactionsId;
-    }
-    
-    public void setTransactionsId(BigDecimal transactionsId) {
-        this.transactionsId = transactionsId;
     }
     public Set getTicketses() {
         return this.ticketses;
