@@ -6,81 +6,101 @@
 package model;
 
 import entities.Tickets;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import java.util.concurrent.Callable;
 
 /**
  *
  * @author Joe
  */
-public class TicketsModel {
-    
-    private Session session;
+public class TicketsModel extends Model{
 
     public TicketsModel() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
     
-    public List<Tickets>getAllTickets(){        
-        List<Tickets> ticketsList=new LinkedList<>();
+    public List<Object>getAllTickets(){        
+        List<Object> list=new LinkedList<>();
         try{
-            Transaction tx=session.beginTransaction();
-            ticketsList=session.createCriteria(Tickets.class).list();
-            tx.commit();            
-        }catch(HibernateException ex){
+            list = this.executeQueryList(new Callable<List<Object>>() {
+                @Override
+                public List<Object> call() throws Exception {
+                    return session.createCriteria(Tickets.class).list();
+                }
+            }); 
+        }catch(Exception ex){
             ex.printStackTrace();
         }
-        return ticketsList;
+        return list;
     }
     
-    public void createTickets(Tickets objTickets){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.save(objTickets);                 
-        }catch(HibernateException ex){
+    public boolean createTickets(final Tickets objTickets){        
+        boolean insert = false;
+        try {
+            this.executeQuery(new Callable<Object>() {
+                @Override
+                public Object call() throws Exception {
+                    return session.save(objTickets);
+                }
+            });
+            insert = true;
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
+        
+        return insert;
         
     }
     
-    public void updateTickets(Tickets objTickets){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.update(objTickets);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public boolean updateTickets(final Tickets objTickets){
+        boolean update = false;
+        try {
+            update = (Boolean) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Boolean call() throws Exception {
+                    session.update(objTickets);
+                    return true;
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
-        }        
+        }
+        return update;
     }
     
-    public void removeTickets(Tickets objTickets){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.delete(objTickets);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public boolean removeTickets(final Tickets objTickets){
+        boolean delete = false;
+        try {
+            delete = (Boolean) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Boolean call() throws Exception {
+                    session.update(objTickets);
+                    return true;
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
+        return delete;
         
     }
     
-    public Tickets getTickets(int id){
-        Tickets objTickets=null;
-        Transaction tx=session.beginTransaction();
-        try{
-            objTickets=(Tickets)session.get(Tickets.class,id);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public Tickets getTickets(final BigDecimal id){
+        Tickets user = null;
+        
+        try {
+            user = (Tickets) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Tickets call() throws Exception {
+                    return (Tickets) session.get(Tickets.class, id);
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
-        return objTickets;
+        
+        return user;
     }
     
 }

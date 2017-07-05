@@ -6,81 +6,101 @@
 package model;
 
 import entities.Recharges;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import java.util.concurrent.Callable;
 
 /**
  *
  * @author Joe
  */
-public class RechargesModel {
-    
-    private Session session;
+public class RechargesModel extends Model{
 
     public RechargesModel() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
     
-    public List<Recharges>getAllRecharges(){        
-        List<Recharges> rechargesList=new LinkedList<>();
+    public List<Object>getAllRecharges(){        
+        List<Object> list=new LinkedList<>();
         try{
-            Transaction tx=session.beginTransaction();
-            rechargesList=session.createCriteria(Recharges.class).list();
-            tx.commit();            
-        }catch(HibernateException ex){
+            list = this.executeQueryList(new Callable<List<Object>>() {
+                @Override
+                public List<Object> call() throws Exception {
+                    return session.createCriteria(Recharges.class).list();
+                }
+            }); 
+        }catch(Exception ex){
             ex.printStackTrace();
         }
-        return rechargesList;
+        return list;
     }
     
-    public void createRecharges(Recharges objRecharges){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.save(objRecharges);                 
-        }catch(HibernateException ex){
+    public boolean createRecharges(final Recharges objRecharges){        
+        boolean insert = false;
+        try {
+            this.executeQuery(new Callable<Object>() {
+                @Override
+                public Object call() throws Exception {
+                    return session.save(objRecharges);
+                }
+            });
+            insert = true;
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
+        
+        return insert;
         
     }
     
-    public void updateRecharges(Recharges objRecharges){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.update(objRecharges);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public boolean updateRecharges(final Recharges objRecharges){
+        boolean update = false;
+        try {
+            update = (Boolean) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Boolean call() throws Exception {
+                    session.update(objRecharges);
+                    return true;
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
-        }        
+        }
+        return update;
     }
     
-    public void removeRecharges(Recharges objRecharges){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.delete(objRecharges);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public boolean removeRecharges(final Recharges objRecharges){
+        boolean delete = false;
+        try {
+            delete = (Boolean) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Boolean call() throws Exception {
+                    session.update(objRecharges);
+                    return true;
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
+        return delete;
         
     }
     
-    public Recharges getRecharges(int id){
-        Recharges objRecharges=null;
-        Transaction tx=session.beginTransaction();
-        try{
-            objRecharges=(Recharges)session.get(Recharges.class,id);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public Recharges getRecharges(final BigDecimal id){
+        Recharges recharge = null;
+        
+        try {
+            recharge = (Recharges) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Recharges call() throws Exception {
+                    return (Recharges) session.get(Recharges.class, id);
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
-        return objRecharges;
+        
+        return recharge;
     }
     
 }

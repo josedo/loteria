@@ -6,81 +6,101 @@
 package model;
 
 import entities.Payment;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import java.util.concurrent.Callable;
 
 /**
  *
  * @author Joe
  */
-public class PaymentModel {
-    
-    private Session session;
+public class PaymentModel extends Model{
 
     public PaymentModel() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
     
-    public List<Payment>getAllPayment(){        
-        List<Payment> paymentList=new LinkedList<>();
+    public List<Object>getAllPayment(){        
+        List<Object> list=new LinkedList<>();
         try{
-            Transaction tx=session.beginTransaction();
-            paymentList=session.createCriteria(Payment.class).list();
-            tx.commit();            
-        }catch(HibernateException ex){
+            list = this.executeQueryList(new Callable<List<Object>>() {
+                @Override
+                public List<Object> call() throws Exception {
+                    return session.createCriteria(Payment.class).list();
+                }
+            }); 
+        }catch(Exception ex){
             ex.printStackTrace();
         }
-        return paymentList;
+        return list;
     }
     
-    public void createPayment(Payment objPayment){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.save(objPayment);                 
-        }catch(HibernateException ex){
+    public boolean createPayment(final Payment objPayment){        
+        boolean insert = false;
+        try {
+            this.executeQuery(new Callable<Object>() {
+                @Override
+                public Object call() throws Exception {
+                    return session.save(objPayment);
+                }
+            });
+            insert = true;
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
+        
+        return insert;
         
     }
     
-    public void updatePayment(Payment objPayment){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.update(objPayment);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public boolean updatePayment(final Payment objPayment){
+        boolean update = false;
+        try {
+            update = (Boolean) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Boolean call() throws Exception {
+                    session.update(objPayment);
+                    return true;
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
-        }        
+        }
+        return update;
     }
     
-    public void removePayment(Payment objPayment){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.delete(objPayment);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public boolean removePayment(final Payment objPayment){
+        boolean delete = false;
+        try {
+            delete = (Boolean) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Boolean call() throws Exception {
+                    session.update(objPayment);
+                    return true;
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
+        return delete;
         
     }
     
-    public Payment getPayment(int id){
-        Payment objPayment=null;
-        Transaction tx=session.beginTransaction();
-        try{
-            objPayment=(Payment)session.get(Payment.class,id);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public Payment getPayment(final BigDecimal id){
+        Payment payment = null;
+        
+        try {
+            payment = (Payment) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Payment call() throws Exception {
+                    return (Payment) session.get(Payment.class, id);
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
-        return objPayment;
+        
+        return payment;
     }
     
 }

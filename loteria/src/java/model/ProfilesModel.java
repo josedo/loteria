@@ -10,64 +10,79 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
-import org.hibernate.HibernateException;
-import org.hibernate.Transaction;
 
 /**
  *
  * @author Joe
  */
-public class ProfilesModel extends Model {
+public class ProfilesModel extends Model{
 
     public ProfilesModel() {
     }
     
-    public List<Object> getAllProfiles(){   
-        List<Object> list = new LinkedList<>();
+    public List<Object>getAllProfiles(){        
+        List<Object> list=new LinkedList<>();
         try{
             list = this.executeQueryList(new Callable<List<Object>>() {
                 @Override
                 public List<Object> call() throws Exception {
                     return session.createCriteria(Profiles.class).list();
-                }                
-            });           
+                }
+            }); 
         }catch(Exception ex){
             ex.printStackTrace();
         }
         return list;
     }
     
-    public void createProfiles(Profiles objProfiles){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.save(objProfiles);                 
-        }catch(HibernateException ex){
+    public boolean createProfiles(final Profiles objProfiles){        
+        boolean insert = false;
+        try {
+            this.executeQuery(new Callable<Object>() {
+                @Override
+                public Object call() throws Exception {
+                    return session.save(objProfiles);
+                }
+            });
+            insert = true;
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
+        
+        return insert;
         
     }
     
-    public void updateProfiles(Profiles objProfiles){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.update(objProfiles);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public boolean updateProfiles(final Profiles objProfiles){
+        boolean update = false;
+        try {
+            update = (Boolean) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Boolean call() throws Exception {
+                    session.update(objProfiles);
+                    return true;
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
-        }        
+        }
+        return update;
     }
     
-    public void removeProfiles(Profiles objProfiles){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.delete(objProfiles);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public boolean removeProfiles(final Profiles objProfiles){
+        boolean delete = false;
+        try {
+            delete = (Boolean) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Boolean call() throws Exception {
+                    session.update(objProfiles);
+                    return true;
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
+        return delete;
         
     }
     

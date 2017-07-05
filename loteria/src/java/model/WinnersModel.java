@@ -6,81 +6,101 @@
 package model;
 
 import entities.Winners;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import java.util.concurrent.Callable;
 
 /**
  *
  * @author Joe
  */
-public class WinnersModel {
-    
-    private Session session;
+public class WinnersModel extends Model{
 
     public WinnersModel() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
     
-    public List<Winners>getAllWinners(){        
-        List<Winners> winnersList=new LinkedList<>();
+    public List<Object>getAllWinners(){        
+        List<Object> list=new LinkedList<>();
         try{
-            Transaction tx=session.beginTransaction();
-            winnersList=session.createCriteria(Winners.class).list();
-            tx.commit();            
-        }catch(HibernateException ex){
+            list = this.executeQueryList(new Callable<List<Object>>() {
+                @Override
+                public List<Object> call() throws Exception {
+                    return session.createCriteria(Winners.class).list();
+                }
+            }); 
+        }catch(Exception ex){
             ex.printStackTrace();
         }
-        return winnersList;
+        return list;
     }
     
-    public void createWinners(Winners objWinners){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.save(objWinners);                 
-        }catch(HibernateException ex){
+    public boolean createWinners(final Winners objWinners){        
+        boolean insert = false;
+        try {
+            this.executeQuery(new Callable<Object>() {
+                @Override
+                public Object call() throws Exception {
+                    return session.save(objWinners);
+                }
+            });
+            insert = true;
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
+        
+        return insert;
         
     }
     
-    public void updateWinners(Winners objWinners){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.update(objWinners);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public boolean updateWinners(final Winners objWinners){
+        boolean update = false;
+        try {
+            update = (Boolean) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Boolean call() throws Exception {
+                    session.update(objWinners);
+                    return true;
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
-        }        
+        }
+        return update;
     }
     
-    public void removeWinners(Winners objWinners){        
-        Transaction tx=session.beginTransaction();
-        try{            
-            session.delete(objWinners);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public boolean removeWinners(final Winners objWinners){
+        boolean delete = false;
+        try {
+            delete = (Boolean) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Boolean call() throws Exception {
+                    session.update(objWinners);
+                    return true;
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
+        return delete;
         
     }
     
-    public Winners getWinners(int id){
-        Winners objWinners=null;
-        Transaction tx=session.beginTransaction();
-        try{
-            objWinners=(Winners)session.get(Winners.class,id);
-            tx.commit();            
-        }catch(HibernateException ex){
+    public Winners getWinners(final BigDecimal id){
+        Winners winner = null;
+        
+        try {
+            winner = (Winners) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Winners call() throws Exception {
+                    return (Winners) session.get(Winners.class, id);
+                }
+            });
+        } catch (Exception ex) {
             ex.printStackTrace();
-            tx.rollback();
         }
-        return objWinners;
+        
+        return winner;
     }
     
 }
