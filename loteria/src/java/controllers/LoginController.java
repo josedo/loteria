@@ -47,9 +47,13 @@ public class LoginController {
         throws ServletException, IOException  {
         HttpSession session = request.getSession();
         ModelAndView mav = new ModelAndView();
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        session.setAttribute("user", this.users.authenticate(login, password));
+        Users user = this.users.authenticate(request.getParameter("login"), request.getParameter("password"));
+        
+        if (user != null)
+            session.setAttribute("user", user);
+        else
+            mav.addObject("error", "Usuario o Contraseña no válidos.");
+        
         mav.setViewName("login");
         return mav;
     }

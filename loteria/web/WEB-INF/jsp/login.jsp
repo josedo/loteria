@@ -4,8 +4,9 @@
     Author     : Joe-Xidu
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <jsp:include page="include/head.jsp" />
 <c:if test="${sessionScope.user!= null}">
    <c:redirect url="./perfil.htm"/>
@@ -35,7 +36,14 @@
                         <!-- /.col -->
                     </div>
                 </form>
-                <div class="social-auth-links text-center"></div>
+                <c:if test="${not empty error}">
+                    <br>
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                        ${error}
+                    </div>
+                </c:if>
                 <!-- /.social-auth-links -->
                 <a href="#">Recuperar contraseña</a>
             </div>
