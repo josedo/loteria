@@ -35,7 +35,7 @@ public class LoginController {
     
     @RequestMapping(value = {"login.htm"}, method = RequestMethod.GET)
     public ModelAndView form(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException  {
+        throws ServletException, IOException {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("login");
         return mav;
@@ -43,7 +43,7 @@ public class LoginController {
     
     @RequestMapping(value = {"postLogin.htm"}, method = RequestMethod.POST)
     public ModelAndView postLogin(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException  {
+        throws ServletException, IOException {
         HttpSession session = request.getSession();
         ModelAndView mav = new ModelAndView();
         Users user = this.users.authenticate(request.getParameter("login"), request.getParameter("password"));
@@ -59,7 +59,7 @@ public class LoginController {
     
     @RequestMapping(value = {"salir.htm"}, method = RequestMethod.GET)
     public void logout(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException  {
+        throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();
         response.sendRedirect("./login.htm");

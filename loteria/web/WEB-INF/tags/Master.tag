@@ -7,7 +7,7 @@
 <%@tag description="Pagina Maestra" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:if test="${sessionScope.user== null}">
-   <c:redirect url="./login.htm"/>
+   <c:redirect url="/login.htm"/>
 </c:if>
 <%@attribute name="header" fragment="true" %>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->

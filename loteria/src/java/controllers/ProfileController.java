@@ -33,7 +33,7 @@ public class ProfileController {
     
     @RequestMapping(value = {"perfil.htm"}, method = RequestMethod.GET)
     public ModelAndView profile(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException  {
+        throws ServletException, IOException {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("perfil");
         return mav;

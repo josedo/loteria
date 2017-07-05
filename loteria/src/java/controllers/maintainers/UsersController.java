@@ -5,7 +5,9 @@
  */
 package controllers.maintainers;
 
+import entities.Users;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,9 +30,10 @@ public class UsersController {
     
     @RequestMapping(value = {"mantenedores/usuarios.htm"}, method = RequestMethod.GET)
     public ModelAndView profile(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException  {
+        throws ServletException, IOException {
         ModelAndView mav = new ModelAndView();
-        
+        List<Object> list = this.users.getAllUsers();
+        mav.addObject("list", list);
         mav.setViewName("maintainers/users/all");
         return mav;
     }

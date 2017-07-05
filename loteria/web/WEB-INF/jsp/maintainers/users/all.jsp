@@ -32,18 +32,21 @@
                                         <th>Usuario</th>
                                         <th>Nombre</th>
                                         <th>Rut</th>
+                                        <th>Dinero</th>
+                                        <th>Email</th>
                                         <th>Perfil</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach items="${list}" var="user">
                                         <tr>
-                                            <td>${user.login}</td>
-                                            <td>${user.name}</td>
+                                            <td>${user.username}</td>
+                                            <td>${user.firstName} ${user.lastName}</td>
                                             <td>${user.rut} - ${user.dv}</td>
-                                            <td>${user.profile}</td>
+                                            <td>${user.wallet}</td>
+                                            <td>${user.email}</td>
+                                            <td>perfil</td>
                                             <td><span class="label label-${user.status==1?"success":"danger"}">${user.status==1?"Activo":"Inactivo"}</span></td>
                                             <td>
                                                 <a class="btn btn-primary btn-xs btnEditar" data-id="${user.id}" data-url="./usuarios/update" data-original-title="Editar" data-toggle="tooltip"><i class="fa fa-pencil-square-o"></i></a>
