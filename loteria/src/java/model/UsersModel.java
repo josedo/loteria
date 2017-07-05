@@ -26,7 +26,7 @@ public class UsersModel extends Model {
     public List<Users> getAllUsers(){
         List<Users> list = new LinkedList<>();
         try{
-            this.exceuteQueryList(new Callable<List<Object>>() {
+            this.executeQueryList(new Callable<List<Object>>() {
 
                 @Override
                 public List<Object> call() throws Exception {
@@ -78,7 +78,7 @@ public class UsersModel extends Model {
         Users user = null;
         
         try {
-            user = (Users) this.exceuteQuery(new Callable<Object>() {
+            user = (Users) this.executeQuery(new Callable<Object>() {
 
                 @Override
                 public Users call() throws Exception {
@@ -95,7 +95,7 @@ public class UsersModel extends Model {
     public Users authenticate(final String username, final String password){
         Users user = null;
         try {
-            user = (Users) this.exceuteQuery(new Callable<Object>() {
+            user = (Users) this.executeQuery(new Callable<Object>() {
 
                 @Override
                 public Users call() throws Exception {

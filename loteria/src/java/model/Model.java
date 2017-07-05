@@ -23,7 +23,7 @@ public class Model {
         this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
     
-    protected Object exceuteQuery(Callable<Object> query) throws Exception {
+    protected Object executeQuery(Callable<Object> query) throws Exception {
         Object object = null;
         this.setSession();
         this.session.getTransaction().begin();
@@ -37,7 +37,7 @@ public class Model {
         return object;
     }
     
-    protected List<Object> exceuteQueryList(Callable<List<Object>> query) throws Exception {
+    protected List<Object> executeQueryList(Callable<List<Object>> query) throws Exception {
         List<Object> list = new LinkedList<>();
         this.setSession();
         this.session.getTransaction().begin();
