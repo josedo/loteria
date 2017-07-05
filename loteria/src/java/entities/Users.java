@@ -1,5 +1,5 @@
 package entities;
-// Generated 05-jul-2017 1:22:33 by Hibernate Tools 4.3.1
+// Generated 05-07-2017 11:24:52 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -22,6 +22,7 @@ public class Users  implements java.io.Serializable {
      private long rut;
      private String dv;
      private String email;
+     private boolean status;
      private Set rechargeses = new HashSet(0);
      private Set ticketses = new HashSet(0);
      private Set winnerses = new HashSet(0);
@@ -30,7 +31,7 @@ public class Users  implements java.io.Serializable {
     }
 
 	
-    public Users(BigDecimal id, Profiles profiles, String username, String password, String firstName, String lastName, BigDecimal wallet, long rut, String dv, String email) {
+    public Users(BigDecimal id, Profiles profiles, String username, String password, String firstName, String lastName, BigDecimal wallet, long rut, String dv, String email, boolean status) {
         this.id = id;
         this.profiles = profiles;
         this.username = username;
@@ -41,8 +42,9 @@ public class Users  implements java.io.Serializable {
         this.rut = rut;
         this.dv = dv;
         this.email = email;
+        this.status = status;
     }
-    public Users(BigDecimal id, Profiles profiles, String username, String password, String firstName, String lastName, BigDecimal wallet, long rut, String dv, String email, Set rechargeses, Set ticketses, Set winnerses) {
+    public Users(BigDecimal id, Profiles profiles, String username, String password, String firstName, String lastName, BigDecimal wallet, long rut, String dv, String email, boolean status, Set rechargeses, Set ticketses, Set winnerses) {
        this.id = id;
        this.profiles = profiles;
        this.username = username;
@@ -53,6 +55,7 @@ public class Users  implements java.io.Serializable {
        this.rut = rut;
        this.dv = dv;
        this.email = email;
+       this.status = status;
        this.rechargeses = rechargeses;
        this.ticketses = ticketses;
        this.winnerses = winnerses;
@@ -127,6 +130,13 @@ public class Users  implements java.io.Serializable {
     
     public void setEmail(String email) {
         this.email = email;
+    }
+    public boolean isStatus() {
+        return this.status;
+    }
+    
+    public void setStatus(boolean status) {
+        this.status = status;
     }
     public Set getRechargeses() {
         return this.rechargeses;
