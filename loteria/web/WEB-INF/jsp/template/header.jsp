@@ -12,7 +12,7 @@
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
-        <a href="./perfil.htm" class="logo">
+        <a href="/loteria/perfil.htm" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini">LOTERIA</span>
             <!-- logo for regular state and mobile devices -->
@@ -86,7 +86,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">Navegación</li>
-                <li><a href="./perfil"><i class="fa fa-home"></i> Inicio</a></li>
+                <li><a href="/loteria/perfil.htm"><i class="fa fa-home"></i> Inicio</a></li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-edit"></i>
@@ -95,11 +95,11 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="./mantenedores/usuarios.htm"><i class="fa fa-user"></i> Usuarios</a>
+                            <a href="/loteria/mantenedores/usuarios.htm"><i class="fa fa-user"></i> Usuarios</a>
                         </li>
                     </ul>
                 </li>
-                <li><a href="./configuracion"><i class="fa fa-cogs"></i> Configuración del Sistema</a></li>
+                <li><a href="/loteria/configuracion"><i class="fa fa-cogs"></i> Configuración del Sistema</a></li>
             </ul>
             
         </section>

@@ -6,6 +6,7 @@
 package model;
 
 import entities.Pages;
+import entities.Users;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,42 +16,43 @@ import java.util.concurrent.Callable;
  *
  * @author Joe
  */
-public class PagesModel extends Model{
+public class PagesModel extends Model {
 
     public PagesModel() {
     }
     
-    public List<Object>getAllPages(){        
-        List<Object> list=new LinkedList<>();
+    public List<Object> getAllPages(){
+        List<Object> list = new LinkedList<>();
         try{
             list = this.executeQueryList(new Callable<List<Object>>() {
                 @Override
                 public List<Object> call() throws Exception {
                     return session.createCriteria(Pages.class).list();
-                }
-            }); 
+                }   
+            });           
         }catch(Exception ex){
             ex.printStackTrace();
         }
         return list;
     }
     
-    public boolean createPages(final Pages objPages){        
+    public boolean createPages(final Pages objPages){
         boolean insert = false;
         try {
-            this.executeQuery(new Callable<Object>() {
+            insert = (Boolean) this.executeQuery(new Callable<Object>() {
                 @Override
-                public Object call() throws Exception {
-                    return session.save(objPages);
+                public Boolean call() throws Exception {
+                    session.save(objPages);
+                    return true;
                 }
             });
-            insert = true;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         
         return insert;
         
+        return insert;
     }
     
     public boolean updatePages(final Pages objPages){
@@ -66,16 +68,16 @@ public class PagesModel extends Model{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return update;
+        return update;    
     }
     
-    public boolean removePages(final Pages objPages){
+    public boolean removePages(final Pages objPages){   
         boolean delete = false;
         try {
             delete = (Boolean) this.executeQuery(new Callable<Object>() {
                 @Override
                 public Boolean call() throws Exception {
-                    session.update(objPages);
+                    session.delete(objPages);
                     return true;
                 }
             });
@@ -83,14 +85,13 @@ public class PagesModel extends Model{
             ex.printStackTrace();
         }
         return delete;
-        
     }
     
     public Pages getPages(final BigDecimal id){
-        Pages pages = null;
+        Pages page = null;
         
         try {
-            pages = (Pages) this.executeQuery(new Callable<Object>() {
+            page = (Pages) this.executeQuery(new Callable<Object>() {
                 @Override
                 public Pages call() throws Exception {
                     return (Pages) session.get(Pages.class, id);
@@ -99,8 +100,9 @@ public class PagesModel extends Model{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return delete;
         
-        return pages;
+        return page;
     }
     
 }

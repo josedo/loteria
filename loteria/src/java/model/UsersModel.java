@@ -40,13 +40,13 @@ public class UsersModel extends Model {
     public boolean createUsers(final Users objUsers){
         boolean insert = false;
         try {
-            this.executeQuery(new Callable<Object>() {
+            insert = (Boolean) this.executeQuery(new Callable<Object>() {
                 @Override
-                public Object call() throws Exception {
-                    return session.save(objUsers);
+                public Boolean call() throws Exception {
+                    session.save(objUsers);
+                    return true;
                 }
             });
-            insert = true;
         } catch (Exception ex) {
             ex.printStackTrace();
         }

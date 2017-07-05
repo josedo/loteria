@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <label for="username" class="col-sm-2 control-label">Usuario</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="username" id="username" placeholder="Usuario" type="email" required="required">
+                                    <input class="form-control" name="username" id="username" placeholder="Usuario" type="text" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -105,9 +105,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Nombre</label>
+                                <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="email" id="email" placeholder="Email" type="text" required="required">
+                                    <input class="form-control" name="email" id="email" placeholder="Email" type="email" required="required">
                                 </div>
                             </div>
                             <div class="form-group">

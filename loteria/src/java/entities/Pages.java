@@ -11,17 +11,15 @@ import java.util.Set;
  */
 public class Pages  implements java.io.Serializable {
 
-
-     private BigDecimal id;
-     private String name;
-     private String url;
-     private String icon;
-     private BigDecimal parent;
-     private Set profilesPageses = new HashSet(0);
+    private BigDecimal id;
+    private String name;
+    private String url;
+    private String icon;
+    private BigDecimal parent;
+    private Set profilesPageses = new HashSet(0);
 
     public Pages() {
     }
-
 	
     public Pages(BigDecimal id, String name, String url, String icon, BigDecimal parent) {
         this.id = id;
@@ -30,6 +28,7 @@ public class Pages  implements java.io.Serializable {
         this.icon = icon;
         this.parent = parent;
     }
+    
     public Pages(BigDecimal id, String name, String url, String icon, BigDecimal parent, Set profilesPageses) {
        this.id = id;
        this.name = name;
@@ -82,8 +81,16 @@ public class Pages  implements java.io.Serializable {
         this.profilesPageses = profilesPageses;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "{\"data\": {" + 
+                "\"id\": \"" + id.intValueExact() + '"' +
+                ",\"name\": \"" + name + '"' +
+                ",\"url\": \"" + url + '"' +
+                ",\"icon\": \"" + icon + '"' +
+                ",\"parent\": \"" + parent.intValueExact() + '"' +
+                "}}";
+    }
 
 }
 
