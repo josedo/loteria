@@ -51,8 +51,6 @@ public class PagesModel extends Model {
         }
         
         return insert;
-        
-        return insert;
     }
     
     public boolean updatePages(final Pages objPages){
@@ -100,7 +98,6 @@ public class PagesModel extends Model {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return delete;
         
         return page;
     }
