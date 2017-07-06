@@ -86,20 +86,51 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">Navegación</li>
-                <li><a href="/loteria/perfil.htm"><i class="fa fa-home"></i> Inicio</a></li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-edit"></i>
-                        <span>Mantenedores</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li>
-                            <a href="/loteria/mantenedores/usuarios.htm"><i class="fa fa-user"></i> Usuarios</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="/loteria/configuracion"><i class="fa fa-cogs"></i> Configuración del Sistema</a></li>
+                <c:forEach items="${pageList}" var="objPage">
+                    <c:if test="${objPage.parent==0}">
+                        <c:choose>
+                            <c:when test="${objPage.path=='#'}">
+                            <li class="treeview">
+                                <a href="${objPage.path}">
+                                    <i class="fa ${objPage.icon}"></i>
+                                    <span>${objPage.name}</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <c:forEach items="${pageList}" var="objPageChild">
+                                        <li>
+                                        <c:if test="${objPageChild.id!=0 && objPage.id == objPageChild.parent}">
+                                            <c:choose>
+                                                <c:when test="${objPageChild.path=='#'}">
+                                                    <a href="${objPageChild.path}">
+                                                        <i class="fa ${objPageChild.icon}"></i>
+                                                        <span>${objPageChild.name}</span>
+                                                        <i class="fa fa-angle-left pull-right"></i>
+                                                    </a>
+                                                    <ul class="treeview-menu">
+                                                        <c:forEach items="${pageList}" var="objPageSubChild">
+                                                            <c:if test="${objPageSubChild.id!=0 && objPageChild.id == objPageSubChild.parent}">
+                                                                <li><a href="${objPageSubChild.path}"><i class="fa ${objPageSubChild.icon}"></i> ${objPageSubChild.name}</a></li>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </ul>
+                                                 </c:when>
+                                                <c:otherwise>
+                                                    <a href="${objPageChild.path}"><i class="fa ${objPageChild.icon}"></i> ${objPageChild.name}</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </li>
+                                        </c:if>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="${objPage.path}"><i class="fa ${objPage.icon}"></i> ${objPage.name}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:if>
+                </c:forEach>
             </ul>
             
         </section>
