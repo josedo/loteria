@@ -51,7 +51,7 @@
                 | Pages Routes
                 |
                 -->
-                <prop key="mantenedores/paginas">pagesController</prop>
+                <prop key="mantenedores/paginas.htm">pagesController</prop>
                 <prop key="mantenedores/getPagina.htm">pagesController</prop>
                 <prop key="mantenedores/updatePagina.htm">pagesController</prop>
                 <prop key="mantenedores/deletePagina.htm">pagesController</prop>

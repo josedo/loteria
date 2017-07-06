@@ -81,7 +81,10 @@ public class PagesController {
             String name = request.getParameter("name");
             String url = request.getParameter("url");
             String icon = request.getParameter("icon");
-            BigDecimal parent = BigDecimal.valueOf(Double.parseDouble(request.getParameter("parent")));
+            BigDecimal parent;
+            if (request.getParameter("parent").equals(""))
+                parent = BigDecimal.valueOf(Double.parseDouble(request.getParameter("parent")));
+            else parent = null;
             Pages page = new Pages(id, name, url, icon, parent);
 
             if (id.intValueExact() == 0){

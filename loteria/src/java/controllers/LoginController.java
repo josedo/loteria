@@ -64,6 +64,5 @@ public class LoginController {
         session.invalidate();
         response.sendRedirect("./login.htm");
     }
-    
-    
+      
 }

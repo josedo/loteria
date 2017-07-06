@@ -42,7 +42,7 @@
                                             <td>${page.name}</td>
                                             <td>${page.url}</td>
                                             <td>${page.icon}</td>
-                                            <td>${page.padre}</td>
+                                            <td>${page.parent}</td>
                                             <td>
                                                 <a class="btn btn-primary btn-xs btnEditar" data-id="${page.id}" data-url="./getPagina.htm" data-original-title="Editar" data-toggle="tooltip"><i class="fa fa-pencil-square-o"></i></a>
                                                 <a class="btn btn-primary btn-xs btnEliminar" data-id="${page.id}" data-url="./deletePagina.htm" data-original-title="Eliminar" data-toggle="tooltip"><i class="fa fa-times-circle"></i></a>
@@ -81,7 +81,7 @@
                             <div class="form-group">
                                 <label for="url" class="col-sm-2 control-label">Dirección</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="url" id="url" placeholder="Dirección" type="text">
+                                    <input class="form-control" name="url" id="url" placeholder="Dirección" type="text" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -94,6 +94,7 @@
                                 <label for="parent" class="col-sm-2 control-label">Padre</label>
                                 <div class="col-sm-10">
                                     <select name="parent" id="parent" class="form-control" style="width: 100%;">
+                                        <option value="0">Sin Padre</option>
                                         <c:forEach items="${pages}" var="page">
                                             <option value="${page.id}">${page.name}</option>
                                         </c:forEach>
@@ -104,7 +105,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="addNew" data-controller="usuarios" data-url="./updateUsuario.htm">Guardar</button>
+                        <button type="button" class="btn btn-primary" id="addNew" data-controller="usuarios" data-url="./updatePagina.htm">Guardar</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
