@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import org.hibernate.Query;
 
 /**
  *
@@ -102,6 +103,24 @@ public class TicketsModel extends Model{
         }
         
         return user;
+    }
+    
+    public Tickets getByUser(final BigDecimal user_id){
+        Tickets ticket = null;
+        try {
+            ticket = (Tickets) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Tickets call() throws Exception {
+                    String hql = "From Tickets as ticket Where ticket.USERS_ID = :user_id";
+                    Query query = session.createQuery(hql);
+                    query.setParameter("userName", user_id);
+                    return (Tickets) query.uniqueResult();
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return ticket;
     }
     
 }

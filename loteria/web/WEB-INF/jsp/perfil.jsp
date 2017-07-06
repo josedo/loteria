@@ -65,14 +65,6 @@
                 </div>
                 <div class="col-md-4">
                     <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Tikects</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
                         <div class="box-body">
                             <a class="btn btn-app bg-yellow">
                                 <i class="fa fa-money"></i> Comprar Ticket
@@ -80,6 +72,21 @@
                             <a class="btn btn-app bg-red">
                                 <i class="fa  fa-check-circle"></i> Revisar Ticket
                             </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-xs-12">
+                    <div class="info-box bg-yellow">
+                        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Último Ticket Comprado</span>
+                            <span class="info-box-number">3 | 34 | 15 | 6 | 17 | 7</span>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 50%"></div>
+                            </div>
+                            <span class="progress-description">
+                                50% de acierto en los números
+                            </span>
                         </div>
                     </div>
                 </div>

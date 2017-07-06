@@ -38,7 +38,7 @@
                 
                 <!--
                 |
-                | Users Routes
+                | Users Maintainer Routes
                 |
                 -->
                 <prop key="mantenedores/usuarios.htm">usersController</prop>
@@ -48,7 +48,7 @@
                 
                 <!--
                 |
-                | Pages Routes
+                | Pages Maintainer Routes
                 |
                 -->
                 <prop key="mantenedores/paginas.htm">pagesController</prop>
@@ -58,7 +58,7 @@
                 
                 <!--
                 |
-                | Profiles Routes
+                | Profiles Maintainer Routes
                 |
                 -->
                 <prop key="mantenedores/perfiles.htm">profilesController</prop>
