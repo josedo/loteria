@@ -72,6 +72,82 @@
         });
     }
     
+    var countNumbersTicket = 0;
+    $('.numberTicket').change(function() {
+        if ($(this).prop('checked')) {
+            if (countNumbersTicket >= 6){
+                $(this).bootstrapToggle('off');
+                swal({
+                    title: "Límite alcanzado!",
+                    text: "Sólo puede seleccionar un máximo de 6 números.",
+                    type: "warning"
+                });
+            }
+            countNumbersTicket++;
+        } else {
+            if (countNumbersTicket > 0)
+                countNumbersTicket--;
+        }
+    });
+    
+    $('#cancelTicket').on('click', function() {
+        $('.numberTicket').bootstrapToggle('off');
+    });
+    
+    $('#confirmTicket').on('click', function () {
+        if (countNumbersTicket === 6) {
+            var data = sigecoApp.dataFormMantenedor();
+            var url = $(this).attr('data-url');
+            swal({
+                title: 'Comprar Ticket',
+                text: 'Está seguro de la selección realizada?',
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: 'slide-from-top',
+                showLoaderOnConfirm: true
+            },
+            function () {
+                $.ajax({
+                    url: url,
+                    data: data,
+                    type: "POST",
+                    success: function (data) {
+                        if (data.response === 1) {
+                            swal({
+                                title: "Ticket Generado!",
+                                text: "",
+                                type: "success"
+                            },
+                            function () {
+                                location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: "Error al generar Ticket!",
+                                text: data.msg || "Intente nuevamente.",
+                                type: "error"
+                            });
+                        }
+                    },
+                    error: function () {
+                        swal({
+                            title: "Error al generar Ticket!",
+                            text: "Intente nuevamente.",
+                            type: "error"
+                        });
+                    }
+                });
+            });
+        } else {
+            swal({
+                title: "Números insuficientes!",
+                text: "Debe seleccionar un mínimo de 6 números para realizar la compra.",
+                type: "error"
+            });
+        }
+    });
+    
     $('#region_id').select2().on('change', function() {
         if (this.value > 0) {
             $.ajax({
@@ -135,6 +211,10 @@
     $('#newItem').on('click', function () {
         sigecoApp.clearFormMantanedor();
         $('#new').modal('show');
+    });
+    
+    $('#buyTicket').on('click', function () {
+        $('#newTicket').modal('show');
     });
 
     $('#addNew').on('click', function () {
@@ -248,6 +328,8 @@
             $('.form').find('.form-control').each(function () {
                 if ($(this).parent('[class*="icheckbox"]').length>0)
                     data += '&' + $(this).attr('name') + '=' + ($(this).parent('[class*="icheckbox"]').hasClass("checked")?1:0);
+                else if ($(this).parent('[class*="toogle"]').length>0 && !$(this).parent().hasClass('off'))
+                    data += '&' + $(this).attr('name') + '=' + $(this).val();
                 else
                     data += '&' + $(this).attr('name') + '=' + $(this).val();
             });

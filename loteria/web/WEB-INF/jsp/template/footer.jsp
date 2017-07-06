@@ -57,6 +57,7 @@
         <script src="/loteria/resources/plugins/flot/jquery.flot.pie.min.js"></script>
         <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
         <script src="/loteria/resources/plugins/flot/jquery.flot.categories.min.js"></script>
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
         <!-- page script -->
         <script src="/loteria/resources/dist/js/scripts.js"></script>
 

@@ -66,7 +66,7 @@
                 <div class="col-md-4">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <a class="btn btn-app bg-yellow">
+                            <a class="btn btn-app bg-yellow" id="buyTicket">
                                 <i class="fa fa-money"></i> Comprar Ticket
                             </a>
                             <a class="btn btn-app bg-red">
@@ -132,6 +132,37 @@
                 </div>
             </div>
         </section>
+        <div class="modal" id="newTicket">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Comprar Ticket</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <c:forEach begin="1" end="99" varStatus="loop">
+                                        <input class="numberTicket form-control" name="num${loop.index}" data-size="small" data-toggle="toggle" data-on="${loop.index}" data-off="${loop.index}" type="checkbox" value="${loop.index}">
+                                        <c:if test="${loop.index%10 == 0}">
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top:5px;">
+                                                <div class="col-lg-12">
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="cancelTicket">Cerrar</button>
+                        <button type="button" class="btn btn-success" id="confirmTicket" data-url="./buyTIcket.htm">Comprar</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
         <!-- /.content -->
     </jsp:body>
 </t:Master>
