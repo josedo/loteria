@@ -65,4 +65,16 @@ public class Model {
             }
         });
     }
+    
+    protected BigDecimal MaxId(final Class entity) throws Exception {
+        final String _class = entity.getSimpleName();
+        return (BigDecimal) this.executeQuery(new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                String hql = String.format("select MAX(ob.id) from %s ob", _class);
+                Query query = session.createQuery(hql);
+                return query.uniqueResult(); 
+            }
+        });
+    }
 }

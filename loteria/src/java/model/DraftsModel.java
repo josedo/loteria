@@ -104,4 +104,21 @@ public class DraftsModel extends Model{
         return draft;
     }
     
+    public Drafts getActualDrafts(){
+        Drafts draft = null;
+        try {
+            final BigDecimal id = this.MaxId(Drafts.class);
+            draft = (Drafts) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Drafts call() throws Exception {
+                    return (Drafts) session.get(Drafts.class, id);
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        return draft;
+    }
+    
 }

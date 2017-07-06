@@ -80,12 +80,12 @@
                         <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Último Ticket Comprado</span>
-                            <span class="info-box-number">3 | 34 | 15 | 6 | 17 | 7</span>
+                            <span class="info-box-number">${ticket!=null?ticket.number1:'-'} | ${ticket!=null?ticket.number2:'-'} | ${ticket!=null?ticket.number3:'-'} | ${ticket!=null?ticket.number4:'-'} | ${ticket!=null?ticket.number5:'-'} | ${ticket!=null?ticket.number6:'-'}</span>
                             <div class="progress">
-                                <div class="progress-bar" style="width: 50%"></div>
+                                <div class="progress-bar" style="width: ${succesRate}%"></div>
                             </div>
                             <span class="progress-description">
-                                50% de acierto en los números
+                                ${succesRate} % de acierto en los números
                             </span>
                         </div>
                     </div>
