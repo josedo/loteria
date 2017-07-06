@@ -89,9 +89,9 @@
                 <c:forEach items="${pageList}" var="objPage">
                     <c:if test="${objPage.parent==0}">
                         <c:choose>
-                            <c:when test="${objPage.path=='#'}">
+                            <c:when test="${objPage.url=='#'}">
                             <li class="treeview">
-                                <a href="${objPage.path}">
+                                <a href="${objPage.url}">
                                     <i class="fa ${objPage.icon}"></i>
                                     <span>${objPage.name}</span>
                                     <i class="fa fa-angle-left pull-right"></i>
@@ -101,8 +101,8 @@
                                         <li>
                                         <c:if test="${objPageChild.id!=0 && objPage.id == objPageChild.parent}">
                                             <c:choose>
-                                                <c:when test="${objPageChild.path=='#'}">
-                                                    <a href="${objPageChild.path}">
+                                                <c:when test="${objPageChild.url=='#'}">
+                                                    <a href="${objPageChild.url}">
                                                         <i class="fa ${objPageChild.icon}"></i>
                                                         <span>${objPageChild.name}</span>
                                                         <i class="fa fa-angle-left pull-right"></i>
@@ -110,13 +110,13 @@
                                                     <ul class="treeview-menu">
                                                         <c:forEach items="${pageList}" var="objPageSubChild">
                                                             <c:if test="${objPageSubChild.id!=0 && objPageChild.id == objPageSubChild.parent}">
-                                                                <li><a href="${objPageSubChild.path}"><i class="fa ${objPageSubChild.icon}"></i> ${objPageSubChild.name}</a></li>
+                                                                <li><a href="${objPageSubChild.url}"><i class="fa ${objPageSubChild.icon}"></i> ${objPageSubChild.name}</a></li>
                                                             </c:if>
                                                         </c:forEach>
                                                     </ul>
                                                  </c:when>
                                                 <c:otherwise>
-                                                    <a href="${objPageChild.path}"><i class="fa ${objPageChild.icon}"></i> ${objPageChild.name}</a>
+                                                    <a href="${objPageChild.url}"><i class="fa ${objPageChild.icon}"></i> ${objPageChild.name}</a>
                                                 </c:otherwise>
                                             </c:choose>
                                         </li>
@@ -126,7 +126,7 @@
                             </li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="${objPage.path}"><i class="fa ${objPage.icon}"></i> ${objPage.name}</a></li>
+                                <li><a href="${objPage.url}"><i class="fa ${objPage.icon}"></i> ${objPage.name}</a></li>
                             </c:otherwise>
                         </c:choose>
                     </c:if>

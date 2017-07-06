@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import org.hibernate.Query;
 
 /**
  *
@@ -27,6 +28,24 @@ public class ProfilesPagesModel extends Model{
                 @Override
                 public List<Object> call() throws Exception {
                     return session.createCriteria(ProfilesPages.class).list();
+                }
+            }); 
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return list;
+    }
+    
+        public List<Object>getAllProfilesPagesByProfile(final BigDecimal id){        
+        List<Object> list=new LinkedList<>();
+        try{
+            list = this.executeQueryList(new Callable<List<Object>>() {
+                @Override
+                public List<Object> call() throws Exception {
+                    String hql = "select p From Pages as p join p.profilesPageses as pp Where p.id = pp.pages.id and pp.profiles.id = :id";
+                    Query query = session.createQuery(hql);
+                    query.setParameter("id", id);
+                    return query.list();
                 }
             }); 
         }catch(Exception ex){
