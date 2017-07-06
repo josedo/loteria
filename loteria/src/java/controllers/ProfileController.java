@@ -49,17 +49,27 @@ public class ProfileController {
     public ModelAndView profile(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         HttpSession session = request.getSession();
-        userSession = (Users) session.getAttribute("user");
-        ModelAndView mav = new ModelAndView();
-        Locale locale = new Locale("cl", "CL");
-        PrizePot pp = this.prizePot.getPrizePot(BigDecimal.ONE);
-        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
-        Tickets ticket = this.tickets.getByUser(this.userSession.getId());
-        System.out.println(ticket.getNumber1());
-        mav.addObject("pp", pp);
-        mav.addObject("fmt", fmt);
-        mav.setViewName("perfil");
-        return mav;
+        
+        if (this.validateSession(session)) {
+            ModelAndView mav = new ModelAndView();
+            Locale locale = new Locale("cl", "CL");
+            PrizePot pp = this.prizePot.getPrizePot(BigDecimal.ONE);
+            NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
+            Tickets ticket = this.tickets.getByUser(this.userSession);
+            mav.addObject("pp", pp);
+            mav.addObject("fmt", fmt);
+            mav.setViewName("perfil");
+            return mav;
+        } else {
+            response.sendRedirect("/loteria/login.htm");
+            return null;
+        }
+        
+    }
+    
+    private boolean validateSession(HttpSession session) throws IOException {
+        this.userSession = (Users) session.getAttribute("user");
+        return null != this.userSession;
     }
     
 }

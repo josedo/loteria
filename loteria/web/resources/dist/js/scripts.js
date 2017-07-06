@@ -269,12 +269,20 @@
                 data: 'id=' + id,
                 type: "POST",
                 success: function (data) {
-                    $('#addForm').find('.form-control').each(function () {
-                        if ($(this).is('select'))
-                            $(this).select2('val', data.data[$(this).attr('name')]);
-                        else
-                            $(this).val(data.data[$(this).attr('name')]);
-                    });
+                    if (data.response === 0) {
+                        swal({
+                            title: "Error al obtener datos!",
+                            text: data.msg || "Intente nuevamente.",
+                            type: "error"
+                        });
+                    } else {
+                        $('#addForm').find('.form-control').each(function () {
+                            if ($(this).is('select'))
+                                $(this).select2('val', data.data[$(this).attr('name')]);
+                            else
+                                $(this).val(data.data[$(this).attr('name')]);
+                        });
+                    }
                 }
             });
         },

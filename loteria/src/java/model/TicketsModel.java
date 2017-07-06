@@ -6,6 +6,7 @@
 package model;
 
 import entities.Tickets;
+import entities.Users;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
@@ -105,15 +106,15 @@ public class TicketsModel extends Model{
         return user;
     }
     
-    public Tickets getByUser(final BigDecimal user_id){
+    public Tickets getByUser(final Users user){
         Tickets ticket = null;
         try {
             ticket = (Tickets) this.executeQuery(new Callable<Object>() {
                 @Override
                 public Tickets call() throws Exception {
-                    String hql = "From Tickets as ticket Where ticket.USERS_ID = :user_id";
+                    String hql = "From Tickets as ticket Where ticket.users = :user";
                     Query query = session.createQuery(hql);
-                    query.setParameter("userName", user_id);
+                    query.setParameter("user", user);
                     return (Tickets) query.uniqueResult();
                 }
             });

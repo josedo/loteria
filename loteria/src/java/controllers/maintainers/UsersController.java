@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.ProfilesModel;
 import model.UsersModel;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ public class UsersController {
     
     private UsersModel users;
     private ProfilesModel profiles;
+    private Users userSession;
 
     public UsersController() {
         this.users = new UsersModel();
@@ -42,22 +44,37 @@ public class UsersController {
     @RequestMapping(value = {"mantenedores/usuarios.htm"}, method = RequestMethod.GET)
     public ModelAndView listado(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        ModelAndView mav = new ModelAndView();
-        List<Object> list = this.users.getAllUsers();
-        List<Object> profilesList = this.profiles.getAllProfiles();
-        mav.addObject("list", list);
-        mav.addObject("profiles", profilesList);
-        mav.setViewName("maintainers/users/all");
-        return mav;
+        HttpSession session = request.getSession();
+        
+        if (this.validateSession(session)) {
+            ModelAndView mav = new ModelAndView();
+            List<Object> list = this.users.getAllUsers();
+            List<Object> profilesList = this.profiles.getAllProfiles();
+            mav.addObject("list", list);
+            mav.addObject("profiles", profilesList);
+            mav.setViewName("maintainers/users/all");
+            return mav;
+        } else {
+            response.sendRedirect("/loteria/login.htm");
+            return null;
+        }
     }
     
     @RequestMapping(value = {"mantenedores/getUsuario.htm"}, method = RequestMethod.POST)
     public ModelAndView get(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
+        HttpSession session = request.getSession();
         ModelAndView mav = new ModelAndView();
-        BigDecimal id = BigDecimal.valueOf(Double.parseDouble(request.getParameter("id")));
-        Users user = this.users.getUsers(id);
-        mav.addObject("json", user);
+        
+        if (this.validateSession(session)) {
+            BigDecimal id = BigDecimal.valueOf(Double.parseDouble(request.getParameter("id")));
+            Users user = this.users.getUsers(id);
+            mav.addObject("json", user);
+        } else {
+            String json = "{\"response\":0, \"msg\":\"Sesión caducada, favor de reiniciar la página actual.\"}";
+            mav.addObject("json", json);
+        }
+        
         mav.setViewName("include/json");
         return mav;
     }
@@ -65,15 +82,21 @@ public class UsersController {
     @RequestMapping(value = {"mantenedores/deleteUsuario.htm"}, method = RequestMethod.POST)
     public ModelAndView delete(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String json = "{\"response\":0, \"msg\":\"Sesión caducada, favor de reiniciar la página actual.\"}";
         ModelAndView mav = new ModelAndView();
-        String json = "{\"response\":0}";
-        BigDecimal id = BigDecimal.valueOf(Double.parseDouble(request.getParameter("id")));
-        Users user = this.users.getUsers(id);
-        user.setStatus(false);
         
-        if (this.users.removeUsers(user))
-            json = "{\"response\":1}";
-            
+        if (this.validateSession(session)) {
+            json = "{\"response\":0}";
+            BigDecimal id = BigDecimal.valueOf(Double.parseDouble(request.getParameter("id")));
+            Users user = this.users.getUsers(id);
+            user.setStatus(false);
+
+            if (this.users.removeUsers(user))
+                json = "{\"response\":1}";
+
+        }
+        
         mav.addObject("json", json);
         mav.setViewName("include/json");
         return mav;
@@ -82,53 +105,64 @@ public class UsersController {
     @RequestMapping(value = {"mantenedores/updateUsuario.htm"}, method = RequestMethod.POST)
     public ModelAndView update(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String json = "{\"response\":0, \"msg\":\"Sesión caducada, favor de reiniciar la página actual.\"}";
         ModelAndView mav = new ModelAndView();
-        String json = "{\"response\":0}";
-        try {
-            BigDecimal id = BigDecimal.valueOf(Double.parseDouble(request.getParameter("id")));
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String firstName = request.getParameter("firstName");
-            String lastName = request.getParameter("lastName");
-            String email = request.getParameter("email");
-            String rut = request.getParameter("rut");
-            String dv = request.getParameter("dv");
-            BigDecimal wallet = BigDecimal.valueOf(Double.parseDouble(request.getParameter("wallet")));
-            BigDecimal id_profile = BigDecimal.valueOf(Double.parseDouble(request.getParameter("profile")));
-            boolean status = request.getParameter("status").equalsIgnoreCase("1");
-            
-            if (Utilitaria.validarRut(rut + dv)) {
-                
-                Profiles profile = this.profiles.getProfiles(id_profile);
-                Users user = new Users(id, profile, username, password, firstName, lastName, wallet, Long.parseLong(rut), dv, email, status);
-                
-                if (id.intValueExact() == 0){
-                    if (this.users.createUsers(user))
-                        json = "{\"response\":1}";
-                } else {
-                    user = this.users.getUsers(id);
-                    user.setFirstName(firstName);
-                    user.setLastName(lastName);
-                    user.setUsername(username);
-                    user.setPassword(password);
-                    user.setProfiles(profile);
-                    user.setRut(Long.parseLong(rut));
-                    user.setDv(dv);
-                    user.setEmail(email);
-                    user.setWallet(wallet);
-                    user.setStatus(status);
-                    if (this.users.updateUsers(user))
-                        json = "{\"response\":1}";
-                }
+        
+        if (this.validateSession(session)) {
+            json = "{\"response\":0}";
+            try {
+                BigDecimal id = BigDecimal.valueOf(Double.parseDouble(request.getParameter("id")));
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                String firstName = request.getParameter("firstName");
+                String lastName = request.getParameter("lastName");
+                String email = request.getParameter("email");
+                String rut = request.getParameter("rut");
+                String dv = request.getParameter("dv");
+                BigDecimal wallet = BigDecimal.valueOf(Double.parseDouble(request.getParameter("wallet")));
+                BigDecimal id_profile = BigDecimal.valueOf(Double.parseDouble(request.getParameter("profile")));
+                boolean status = request.getParameter("status").equalsIgnoreCase("1");
 
-            } else 
-                json = "{\"response\":0, \"msg\":\"Rut ingresado no es correcto.\"}";
-        } catch (Exception e) {
-            e.printStackTrace();
+                if (Utilitaria.validarRut(rut + dv)) {
+
+                    Profiles profile = this.profiles.getProfiles(id_profile);
+                    Users user = new Users(id, profile, username, password, firstName, lastName, wallet, Long.parseLong(rut), dv, email, status);
+
+                    if (id.intValueExact() == 0){
+                        if (this.users.createUsers(user))
+                            json = "{\"response\":1}";
+                    } else {
+                        user = this.users.getUsers(id);
+                        user.setFirstName(firstName);
+                        user.setLastName(lastName);
+                        user.setUsername(username);
+                        user.setPassword(password);
+                        user.setProfiles(profile);
+                        user.setRut(Long.parseLong(rut));
+                        user.setDv(dv);
+                        user.setEmail(email);
+                        user.setWallet(wallet);
+                        user.setStatus(status);
+                        if (this.users.updateUsers(user))
+                            json = "{\"response\":1}";
+                    }
+
+                } else 
+                    json = "{\"response\":0, \"msg\":\"Rut ingresado no es correcto.\"}";
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        
         mav.addObject("json", json);
         mav.setViewName("include/json");
         return mav;
+    }
+    
+    private boolean validateSession(HttpSession session) throws IOException {
+        this.userSession = (Users) session.getAttribute("user");
+        return null != this.userSession;
     }
 
 }
