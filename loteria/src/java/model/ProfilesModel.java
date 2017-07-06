@@ -38,6 +38,7 @@ public class ProfilesModel extends Model{
     public boolean createProfiles(final Profiles objProfiles){        
         boolean insert = false;
         try {
+            objProfiles.setId(this.nextId(Profiles.class));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {
@@ -75,7 +76,7 @@ public class ProfilesModel extends Model{
             delete = (Boolean) this.executeQuery(new Callable<Object>() {
                 @Override
                 public Boolean call() throws Exception {
-                    session.update(objProfiles);
+                    session.delete(objProfiles);
                     return true;
                 }
             });

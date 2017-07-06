@@ -55,6 +55,16 @@
                 <prop key="mantenedores/getPagina.htm">pagesController</prop>
                 <prop key="mantenedores/updatePagina.htm">pagesController</prop>
                 <prop key="mantenedores/deletePagina.htm">pagesController</prop>
+                
+                <!--
+                |
+                | Profiles Routes
+                |
+                -->
+                <prop key="mantenedores/perfiles.htm">profilesController</prop>
+                <prop key="mantenedores/getPerfil.htm">profilesController</prop>
+                <prop key="mantenedores/updatePerfil.htm">profilesController</prop>
+                <prop key="mantenedores/deletePerfil.htm">profilesController</prop>
             </props>
         </property>
     </bean>
@@ -63,6 +73,7 @@
     <bean name="profileController" class="controllers.ProfileController"/>
     <bean name="usersController" class="controllers.maintainers.UsersController"/>
     <bean name="pagesController" class="controllers.maintainers.PagesController"/>
+    <bean name="profilesController" class="controllers.maintainers.ProfilesController"/>
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
