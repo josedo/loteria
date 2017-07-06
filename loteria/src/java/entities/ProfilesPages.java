@@ -9,7 +9,6 @@ import java.math.BigDecimal;
  */
 public class ProfilesPages  implements java.io.Serializable {
 
-
      private BigDecimal id;
      private Pages pages;
      private Profiles profiles;

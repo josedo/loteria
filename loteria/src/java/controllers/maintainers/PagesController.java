@@ -6,6 +6,7 @@
 package controllers.maintainers;
 
 import entities.Pages;
+import entities.Profiles;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.PagesModel;
+import model.ProfilesModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,9 +31,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class PagesController {
     
     private PagesModel pages;
+    private ProfilesModel profiles;
 
     public PagesController() {
         this.pages = new PagesModel();
+        this.profiles = new ProfilesModel();
     }
     
     @RequestMapping(value = {"mantenedores/paginas.htm"}, method = RequestMethod.GET)
@@ -96,6 +100,8 @@ public class PagesController {
                 page.setUrl(url);
                 page.setIcon(icon);
                 page.setParent(parent);
+                Profiles profile = this.profiles.getProfiles(id);
+                page.getProfilesPageses().add(profile);
                 if (this.pages.updatePages(page))
                     json = "{\"response\":1}";
             }

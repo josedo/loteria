@@ -17,30 +17,114 @@
         </section>
         <!-- Main content -->
         <section class="content animated fadeInDown">
-        <div class="row">
-            <div class="col-xs-3">
-            	<div class="box box-primary">
-                    <div class="box-body box-profile">
-                        <img src="/loteria/resources/dist/img/user2-160x160.jpg" class="profile-user-img img-responsive img-circle" alt="Usuario">
-                        <h3 class="profile-username text-center">${user.firstName}</h3>
-                        <p class="text-muted text-center">${user.firstName}</p>
-                        <ul class="list-group list-group-unbordered">
-                            <li class="list-group-item">
-                                <b>Dinero</b>
-                                <a class="pull-right">${user.wallet}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Correo</b><br>
-                                <a class="email-large">${user.email}</a>
-                            </li>
-                        </ul>
-                        <button id="change-password" class="btn btn-primary btn-block"><b>Cambiar Contraseña</b></button>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <img src="/loteria/resources/dist/img/user2-160x160.jpg" class="profile-user-img img-responsive img-circle" alt="Usuario">
+                            <h3 class="profile-username text-center">${user.firstName}</h3>
+                            <p class="text-muted text-center">${user.firstName}</p>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Rut</b>
+                                    <a class="pull-right">${user.rut}-${user.dv}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Correo</b><br>
+                                    <a class="email-large">${user.email}</a>
+                                </li>
+                            </ul>
+                            <button id="change-password" class="btn btn-primary btn-block"><b>Cambiar Contraseña</b></button>
+                        </div>
+                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box-body -->
+                </div>
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>${fmt.format(user.wallet)}</h3>
+                            <p>Bolsa de Dinero</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Abonar <i class="fa fa-usd"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-xs-12">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>${fmt.format(pp.pot)}</h3>
+                            <p>Pozo Acumulado</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-money"></i>
+                        </div>
+                        <div class="small-box-footer">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Tikects</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <a class="btn btn-app bg-yellow">
+                                <i class="fa fa-money"></i> Comprar Ticket
+                            </a>
+                            <a class="btn btn-app bg-red">
+                                <i class="fa  fa-check-circle"></i> Revisar Ticket
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Últimos Tickets Comprados</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table class="table no-margin">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Item</th>
+                                            <th>Status</th>
+                                            <th>Popularity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                                            <td>Call of Duty IV</td>
+                                            <td><span class="label label-success">Shipped</span></td>
+                                            <td>
+                                                <div class="sparkbar" data-color="#00a65a" data-height="20"><canvas style="display: inline-block; width: 34px; height: 20px; vertical-align: top;" width="34" height="20"></canvas></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                              </table>
+                            </div>
+                        </div>
+                        <div class="box-footer clearfix">
+                            <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
+                            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver Todos</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
         <!-- /.content -->
     </jsp:body>
 </t:Master>
