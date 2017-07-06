@@ -86,9 +86,9 @@ public class Pages  implements java.io.Serializable {
         return "{\"data\": {" + 
                 "\"id\": \"" + id.intValueExact() + '"' +
                 ",\"name\": \"" + name + '"' +
-                ",\"url\": \"" + (url!=null?url:"") + '"' +
+                ",\"url\": \"" + url + '"' +
                 ",\"icon\": \"" + icon + '"' +
-                ",\"parent\": \"" + (parent!=null?parent.intValueExact():"") + '"' +
+                ",\"parent\": \"" + parent.intValueExact() + '"' +
                 "}}";
     }
 

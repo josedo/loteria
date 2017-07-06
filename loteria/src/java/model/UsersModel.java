@@ -40,6 +40,7 @@ public class UsersModel extends Model {
     public boolean createUsers(final Users objUsers){
         boolean insert = false;
         try {
+            objUsers.setId(this.nextId(Users.class));
             insert = (Boolean) this.executeQuery(new Callable<Object>() {
                 @Override
                 public Boolean call() throws Exception {

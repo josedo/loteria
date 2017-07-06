@@ -6,7 +6,6 @@
 package model;
 
 import entities.Pages;
-import entities.Users;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,6 +38,7 @@ public class PagesModel extends Model {
     public boolean createPages(final Pages objPages){
         boolean insert = false;
         try {
+            objPages.setId(this.nextId(Pages.class));
             insert = (Boolean) this.executeQuery(new Callable<Object>() {
                 @Override
                 public Boolean call() throws Exception {

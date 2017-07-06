@@ -5,10 +5,13 @@
  */
 package model;
 
+import entities.Users;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -50,5 +53,17 @@ public class Model {
             this.session.getTransaction().rollback();
         }
         return list;
+    }
+    
+    protected BigDecimal nextId(final Class entity) throws Exception {
+        final String _class = entity.getSimpleName();
+        return (BigDecimal) this.executeQuery(new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                String hql = String.format("select MAX(ob.id) + 1 from %s ob", _class);
+                Query query = session.createQuery(hql);
+                return query.uniqueResult(); 
+            }
+        });
     }
 }

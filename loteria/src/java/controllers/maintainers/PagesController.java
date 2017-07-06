@@ -84,7 +84,7 @@ public class PagesController {
             BigDecimal parent;
             if (request.getParameter("parent").equals(""))
                 parent = BigDecimal.valueOf(Double.parseDouble(request.getParameter("parent")));
-            else parent = null;
+            else parent = BigDecimal.valueOf(0);
             Pages page = new Pages(id, name, url, icon, parent);
 
             if (id.intValueExact() == 0){
