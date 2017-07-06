@@ -38,6 +38,7 @@ public class TicketsModel extends Model{
     public boolean createTickets(final Tickets objTickets){        
         boolean insert = false;
         try {
+            objTickets.setId(this.nextId(Tickets.class));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {

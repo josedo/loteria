@@ -38,6 +38,7 @@ public class RechargesModel extends Model{
     public boolean createRecharges(final Recharges objRecharges){        
         boolean insert = false;
         try {
+            objRecharges.setId(this.nextId(Recharges.class));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {

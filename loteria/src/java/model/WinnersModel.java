@@ -38,6 +38,7 @@ public class WinnersModel extends Model{
     public boolean createWinners(final Winners objWinners){        
         boolean insert = false;
         try {
+            objWinners.setId(this.nextId(Winners.class));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {

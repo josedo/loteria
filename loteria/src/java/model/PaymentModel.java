@@ -38,6 +38,7 @@ public class PaymentModel extends Model{
     public boolean createPayment(final Payment objPayment){        
         boolean insert = false;
         try {
+            objPayment.setId(this.nextId(Payment.class));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {

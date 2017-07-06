@@ -38,6 +38,7 @@ public class DraftsModel extends Model{
     public boolean createDrafts(final Drafts objDrafts){        
         boolean insert = false;
         try {
+            objDrafts.setId(this.nextId(Drafts.class));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {
