@@ -61,7 +61,13 @@ public class Profiles  implements java.io.Serializable {
         this.userses = userses;
     }
 
-
+    @Override
+    public String toString() {
+        return "{\"data\": {" + 
+                "\"id\": \"" + id.intValueExact() + '"' +
+                ",\"name\": \"" + name + '"' +
+                "}}";
+    }
 
 
 }

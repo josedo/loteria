@@ -71,7 +71,15 @@ public class Payment  implements java.io.Serializable {
         this.ticketses = ticketses;
     }
 
-
+    @Override
+    public String toString() {
+        return "{\"data\": {" + 
+                "\"id\": \"" + id.intValueExact() + '"' +
+                ",\"transaction\": \"" + transactions.getId() + '"' +
+                ",\"noTickets\": \"" + noTickets + '"' +
+                ",\"amount\": \"" + amount + '"' +
+                "}}";
+    }
 
 
 }

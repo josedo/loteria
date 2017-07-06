@@ -54,7 +54,15 @@ public class Recharges  implements java.io.Serializable {
         this.amount = amount;
     }
 
-
+    @Override
+    public String toString() {
+        return "{\"data\": {" + 
+                "\"id\": \"" + id.intValueExact() + '"' +
+                ",\"transaction\": \"" + transactions.getId() + '"' +
+                ",\"user\": \"" + users.getId() + '"' +
+                ",\"amount\": \"" + amount + '"' +
+                "}}";
+    }
 
 
 }

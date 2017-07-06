@@ -53,7 +53,16 @@ public class Winners  implements java.io.Serializable {
     public void setPrize(BigDecimal prize) {
         this.prize = prize;
     }
-
+    
+    @Override
+    public String toString() {
+        return "{\"data\": {" + 
+                "\"id\": \"" + id.intValueExact() + '"' +
+                ",\"draft\": \"" + drafts.getId() + '"' +
+                ",\"user\": \"" + users.getId() + '"' +
+                ",\"prize\": \"" + prize + '"' +
+                "}}";
+    }
 
 
 

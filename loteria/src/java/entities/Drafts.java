@@ -122,7 +122,19 @@ public class Drafts  implements java.io.Serializable {
         this.winnerses = winnerses;
     }
 
-
+    @Override
+    public String toString() {
+        return "{\"data\": {" + 
+                "\"id\": \"" + id.intValueExact() + '"' +
+                ",\"date\": \"" + date + '"' +
+                ",\"number1\": \"" + number1 + '"' +
+                ",\"number2\": \"" + number2 + '"' +
+                ",\"number3\": \"" + number3 + '"' +
+                ",\"number4\": \"" + number4 + '"' +
+                ",\"number5\": \"" + number5 + '"' +
+                ",\"number6\": \"" + number6 + '"' +
+                "}}";
+    }
 
 
 }
