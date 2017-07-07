@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import org.hibernate.Query;
 
 /**
  *
@@ -20,8 +21,8 @@ public class WinnersModel extends Model{
     public WinnersModel() {
     }
     
-    public List<Object>getAllWinners(){        
-        List<Object> list=new LinkedList<>();
+    public List<Object> getAllWinners(){
+        List<Object> list = new LinkedList<>();
         try{
             list = this.executeQueryList(new Callable<List<Object>>() {
                 @Override
@@ -102,6 +103,24 @@ public class WinnersModel extends Model{
         }
         
         return winner;
+    }
+    
+    public List<Object> allByDraft(final BigDecimal draft){
+        List<Object> list = new LinkedList<>();
+        try {
+            list = this.executeQueryList(new Callable<List<Object>>() {
+                @Override
+                public List<Object> call() throws Exception {
+                    String hql = "From Winners as w Where w.drafts_id = :maxId";
+                    Query query = session.createQuery(hql);
+                    query.setParameter("maxId", draft);
+                    return query.list();
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return list;
     }
     
 }
