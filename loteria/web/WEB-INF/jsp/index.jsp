@@ -96,7 +96,6 @@
             <section class="content-header">
                 <h1>Loteria</h1>
             </section>
-
             <!-- Main content -->
             <section class="content animated fadeInDown">
                 <div class="row">
@@ -127,21 +126,19 @@
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
-                                                <th>Order ID</th>
-                                                <th>Item</th>
-                                                <th>Status</th>
-                                                <th>Popularity</th>
+                                                <th>Nombre</th>
+                                                <th>Sorteo</th>
+                                                <th>Monto</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                <td>Call of Duty IV</td>
-                                                <td><span class="label label-success">Shipped</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#00a65a" data-height="20"><canvas style="display: inline-block; width: 34px; height: 20px; vertical-align: top;" width="34" height="20"></canvas></div>
-                                                </td>
-                                            </tr>
+                                            <c:forEach items="${listWinners}" var="winner">
+                                                <tr>
+                                                    <td>${winner.users.firstName} ${winner.users.lastName}</td>
+                                                    <td>${winner.draft.date}</td>
+                                                    <td>${winner.prize}</td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                   </table>
                                 </div>
@@ -175,21 +172,29 @@
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
-                                                <th>Order ID</th>
-                                                <th>Item</th>
-                                                <th>Status</th>
-                                                <th>Popularity</th>
+                                                <th>Nro. Ticket</th>
+                                                <th>N 1</th>
+                                                <th>N 2</th>
+                                                <th>N 3</th>
+                                                <th>N 4</th>
+                                                <th>N 5</th>
+                                                <th>N 6</th>
+                                                <th>Sorteo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                <td>Call of Duty IV</td>
-                                                <td><span class="label label-success">Shipped</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#00a65a" data-height="20"><canvas style="display: inline-block; width: 34px; height: 20px; vertical-align: top;" width="34" height="20"></canvas></div>
-                                                </td>
-                                            </tr>
+                                            <c:forEach items="${listTickets}" var="ticket">
+                                                <tr>
+                                                    <td>${ticket.id}</td>
+                                                    <td>${ticket.number1}</td>
+                                                    <td>${ticket.number2}</td>
+                                                    <td>${ticket.number3}</td>
+                                                    <td>${ticket.number4}</td>
+                                                    <td>${ticket.number5}</td>
+                                                    <td>${ticket.number6}</td>
+                                                    <td>${ticket.drafts.date}</td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                   </table>
                                 </div>
@@ -226,7 +231,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="cancelTicket">Cerrar</button>
-                            <button type="button" class="btn btn-success" id="confirmTicket" data-url="./buyTicket.htm">Comprar</button>
+                            <button type="button" class="btn btn-default" id="randomTicket" data-url="/loteria/randomTicket.htm">Comprar Al Azar</button>
+                            <button type="button" class="btn btn-success" id="confirmTicket" data-url="/loteria/buyTicket.htm">Comprar</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->

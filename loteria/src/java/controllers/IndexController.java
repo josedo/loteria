@@ -16,6 +16,7 @@ import entities.PrizePot;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 import org.springframework.stereotype.Controller;
 import javax.servlet.ServletException;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.DraftsModel;
 import model.PrizePotModel;
 import model.TicketsModel;
+import model.WinnersModel;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -36,11 +38,13 @@ public class IndexController {
     private PrizePotModel prizePot;
     private TicketsModel tickets;
     private DraftsModel drafts;
+    private WinnersModel winners;
 
     public IndexController() {
         this.prizePot = new PrizePotModel();
         this.tickets = new TicketsModel();
         this.drafts = new DraftsModel();
+        this.winners = new WinnersModel();
     }
     
     @RequestMapping(value = {"index.htm"}, method = RequestMethod.GET)
@@ -52,6 +56,10 @@ public class IndexController {
         PrizePot pp = this.prizePot.getPrizePot(BigDecimal.ONE);
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
         Drafts actualDrafts = this.drafts.getActualDrafts();
+        List<Object> listWinners = this.winners.getAllWinners();
+        List<Object> listTickets = this.tickets.allByDraft(actualDrafts);
+        mav.addObject("listWinners", listWinners);
+        mav.addObject("listTickets", listTickets);
         mav.addObject("actualDrafts", actualDrafts);
         mav.addObject("pp", pp);
         mav.addObject("fmt", fmt);

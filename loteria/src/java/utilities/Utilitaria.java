@@ -7,21 +7,11 @@ package utilities;
 
 /**
  *
- * @author amontess
+ * @author jose.becerra
  */
 public class Utilitaria {
 
     public Utilitaria() {
-    }
-    
-    //metodo que permite generar un codigo con 3 nros al azar y 3 letras.
-    public static String generaCodigo(){
-        String codigo="cod";
-        codigo+=(int)(Math.random()*(999-100+1)+100);        
-        for (int i = 0; i < 3; i++) {
-            codigo+=(char)((int)(Math.random()*(90-65+1)+65));
-        }
-        return codigo;
     }
     
     public static boolean validarRut(String rut) {

@@ -106,6 +106,52 @@
         $('.numberTicket').bootstrapToggle('off');
     });
     
+    $('#randomTicket').on('click', function () {
+        var url = $(this).attr('data-url');
+
+        swal({
+            title: 'Comprar Ticket',
+            text: 'Está seguro de la selección realizada?',
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            animation: 'slide-from-top',
+            showLoaderOnConfirm: true
+        },
+        function () {
+            $.ajax({
+                url: url,
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    if (data.response === 1) {
+                        swal({
+                            title: "Ticket Generado!",
+                            text: "",
+                            type: "success"
+                        },
+                        function () {
+                            location.reload();
+                        });
+                    } else {
+                        swal({
+                            title: "Error al generar Ticket!",
+                            text: data.msg || "Intente nuevamente.",
+                            type: "error"
+                        });
+                    }
+                },
+                error: function () {
+                    swal({
+                        title: "Error al generar Ticket!",
+                        text: "Intente nuevamente.",
+                        type: "error"
+                    });
+                }
+            });
+        });
+    });
+    
     $('#confirmTicket').on('click', function () {
         if (countNumbersTicket === 6) {
             var data = {};

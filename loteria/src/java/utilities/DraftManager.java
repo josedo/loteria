@@ -14,7 +14,6 @@ import java.util.Calendar;
 import java.util.Set;
 import model.DraftsModel;
 import model.TicketsModel;
-import services.Payment;
 
 /**
  *
@@ -83,11 +82,7 @@ public class DraftManager {
         }
     }
     
-    public static void setPrize(){
-        
-    }
-    
-    public static void buyRandomTicket(Users user){
+    public static boolean buyRandomTicket(Users user) throws Exception{
         DraftsModel draftsModel = new DraftsModel();
         TicketsModel ticketsModel = new TicketsModel();
         int[] draftNumbers = new int[6];
@@ -102,6 +97,10 @@ public class DraftManager {
         }
         Drafts draft = draftsModel.getPendingDrafts();
         Tickets ticket = new Tickets(BigDecimal.ZERO, draft, user, BigDecimal.valueOf(draftNumbers[0]), BigDecimal.valueOf(draftNumbers[1]), BigDecimal.valueOf(draftNumbers[2]), BigDecimal.valueOf(draftNumbers[3]), BigDecimal.valueOf(draftNumbers[4]), BigDecimal.valueOf(draftNumbers[5]));
-        ticketsModel.createTickets(ticket);
+        
+        if (TransactionManager.isValidTicket(ticket))    
+            throw new Exception("Ticket no válido");
+        
+        return ticketsModel.createTickets(ticket);
     }
 }

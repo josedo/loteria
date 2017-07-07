@@ -5,6 +5,7 @@
  */
 package model;
 
+import entities.Drafts;
 import entities.Tickets;
 import entities.Users;
 import java.math.BigDecimal;
@@ -22,7 +23,7 @@ public class TicketsModel extends Model{
     public TicketsModel() {
     }
     
-    public List<Object>getAllTickets(){        
+    public List<Object> getAllTickets(){
         List<Object> list=new LinkedList<>();
         try{
             list = this.executeQueryList(new Callable<List<Object>>() {
@@ -107,22 +108,91 @@ public class TicketsModel extends Model{
         return user;
     }
     
-    public Tickets getByUser(final Users user){
-        Tickets ticket = null;
+    public List<Object> getByUser(final Users user, final Drafts draft){
+        List<Object> list = new LinkedList<>();
         try {
-            ticket = (Tickets) this.executeQuery(new Callable<Object>() {
+            list = this.executeQueryList(new Callable<List<Object>>() {
                 @Override
-                public Tickets call() throws Exception {
+                public List<Object> call() throws Exception {
+                    String hql = "From Tickets as ticket Where ticket.users = :user and ticket.drafts = :draft ";
+                    Query query = session.createQuery(hql);
+                    query.setParameter("user", user);
+                    query.setParameter("draft", draft);
+                    return query.list();
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
+    
+    public List<Object> allByDraft(final Drafts draft){
+        List<Object> list = new LinkedList<>();
+        try {
+            list = this.executeQueryList(new Callable<List<Object>>() {
+                @Override
+                public List<Object> call() throws Exception {
+                    String hql = "From Tickets as ticket Where ticket.drafts = :draft ";
+                    Query query = session.createQuery(hql);
+                    query.setParameter("draft", draft);
+                    return query.list();
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
+    
+    public List<Object> allByUser(final Users user){
+        List<Object> list = new LinkedList<>();
+        try{
+            list = this.executeQueryList(new Callable<List<Object>>() {
+                @Override
+                public List<Object> call() throws Exception {
                     String hql = "From Tickets as ticket Where ticket.users = :user";
                     Query query = session.createQuery(hql);
                     query.setParameter("user", user);
+                    return query.list();
+                }
+            }); 
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return list;
+        
+    }
+    
+    public boolean checkTicket(final Tickets ticket){
+        Tickets t = null;
+        try {
+            t = (Tickets) this.executeQuery(new Callable<Object>() {
+                @Override
+                public Tickets call() throws Exception {
+                    String hql = "From Tickets as ticket Where "
+                            + "ticket.number1 = :number1 and "
+                            + "ticket.number2 = :number2 and "
+                            + "ticket.number3 = :number3 and "
+                            + "ticket.number4 = :number4 and "
+                            + "ticket.number5 = :number5 and "
+                            + "ticket.number6 = :number6 and "
+                            + "ticket.drafts = :draft ";
+                    Query query = session.createQuery(hql);
+                    query.setParameter("number1", ticket.getNumber1());
+                    query.setParameter("number2", ticket.getNumber2());
+                    query.setParameter("number3", ticket.getNumber3());
+                    query.setParameter("number4", ticket.getNumber4());
+                    query.setParameter("number5", ticket.getNumber5());
+                    query.setParameter("number6", ticket.getNumber6());
+                    query.setParameter("draft", ticket.getDrafts());
                     return (Tickets) query.uniqueResult();
                 }
             });
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return ticket;
+        return t == null;
     }
     
 }

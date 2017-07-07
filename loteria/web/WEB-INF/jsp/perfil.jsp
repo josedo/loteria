@@ -7,6 +7,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<jsp:useBean id="dm" class="utilities.DraftManager"/>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:Master>
@@ -82,10 +83,10 @@
                             <span class="info-box-text">Último Ticket Comprado</span>
                             <span class="info-box-number">${ticket!=null?ticket.number1:'-'} | ${ticket!=null?ticket.number2:'-'} | ${ticket!=null?ticket.number3:'-'} | ${ticket!=null?ticket.number4:'-'} | ${ticket!=null?ticket.number5:'-'} | ${ticket!=null?ticket.number6:'-'}</span>
                             <div class="progress">
-                                <div class="progress-bar" style="width: ${succesRate}%"></div>
+                                <div class="progress-bar" style="width: ${dm.successRate(ticket)}%"></div>
                             </div>
                             <span class="progress-description">
-                                ${succesRate} % de acierto en los números
+                                ${dm.successRate(ticket)} % de acierto en los números
                             </span>
                         </div>
                     </div>
@@ -105,28 +106,34 @@
                                 <table class="table no-margin">
                                     <thead>
                                         <tr>
-                                            <th>Order ID</th>
-                                            <th>Item</th>
-                                            <th>Status</th>
-                                            <th>Popularity</th>
+                                            <th>Nro. Ticket</th>
+                                            <th>N 1</th>
+                                            <th>N 2</th>
+                                            <th>N 3</th>
+                                            <th>N 4</th>
+                                            <th>N 5</th>
+                                            <th>N 6</th>
+                                            <th>% Acierto</th>
+                                            <th>Sorteo</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                            <td>Call of Duty IV</td>
-                                            <td><span class="label label-success">Shipped</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#00a65a" data-height="20"><canvas style="display: inline-block; width: 34px; height: 20px; vertical-align: top;" width="34" height="20"></canvas></div>
-                                            </td>
-                                        </tr>
+                                        <c:forEach items="${listTickets}" var="ticket">
+                                            <tr>
+                                                <td>${ticket.id}</td>
+                                                <td>${ticket.number1}</td>
+                                                <td>${ticket.number2}</td>
+                                                <td>${ticket.number3}</td>
+                                                <td>${ticket.number4}</td>
+                                                <td>${ticket.number5}</td>
+                                                <td>${ticket.number6}</td>
+                                                <td>${dm.successRate(ticket)} %</td>
+                                                <td>${ticket.drafts.date}</td>
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                               </table>
                             </div>
-                        </div>
-                        <div class="box-footer clearfix">
-                            <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-                            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver Todos</a>
                         </div>
                     </div>
                 </div>
@@ -156,6 +163,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="cancelTicket">Cerrar</button>
+                        <button type="button" class="btn btn-default" id="randomTicket" data-url="/loteria/randomTicket.htm">Comprar Al Azar</button>
                         <button type="button" class="btn btn-success" id="confirmTicket" data-url="./buyTicket.htm">Comprar</button>
                     </div>
                 </div><!-- /.modal-content -->

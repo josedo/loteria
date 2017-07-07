@@ -17,6 +17,7 @@ import entities.Users;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 import org.springframework.stereotype.Controller;
 import javax.servlet.ServletException;
@@ -58,14 +59,14 @@ public class ProfileController {
             Locale locale = new Locale("cl", "CL");
             PrizePot pp = this.prizePot.getPrizePot(BigDecimal.ONE);
             NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
-            Tickets ticket = this.tickets.getByUser(this.userSession);
+            Drafts actualDrafts = this.drafts.getActualDrafts();
+            List<Object> listTickets = this.tickets.getByUser(this.userSession, actualDrafts);
+            Tickets ticket = (Tickets) listTickets.get(listTickets.size() - 1);
             if (ticket != null) {
                 Drafts lastDraft = ticket.getDrafts();
                 mav.addObject("lastDraft", lastDraft);
             }
-            Drafts actualDrafts = this.drafts.getActualDrafts();
-            float succesRate = DraftManager.successRate(ticket);
-            mav.addObject("succesRate", succesRate);
+            mav.addObject("listTickets", listTickets);
             mav.addObject("actualDrafts", actualDrafts);
             mav.addObject("ticket", ticket);
             mav.addObject("pp", pp);
@@ -106,6 +107,31 @@ public class ProfileController {
         }
             mav.addObject("json", json);
         
+        mav.setViewName("include/json");
+        return mav;
+    }
+    
+    @RequestMapping(value = {"randomTicket.htm"}, method = RequestMethod.POST)
+    public ModelAndView randomTicket(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        ModelAndView mav = new ModelAndView();
+        String json = "{\"response\":0}";
+        if (this.validateSession(session)) {
+            
+            try {
+                if (DraftManager.buyRandomTicket(userSession)) {
+                    json = "{\"response\":1}";
+                }
+            } catch (Exception ex) {
+                json = "{\"response\":0, \"msg\":\"" + ex.getMessage() + ".\"}";
+            }
+            
+        } else {
+            json = "{\"response\":0, \"msg\":\"Debe logearse para realizar compra de ticket.\"}";
+        }
+        
+        mav.addObject("json", json);
         mav.setViewName("include/json");
         return mav;
     }

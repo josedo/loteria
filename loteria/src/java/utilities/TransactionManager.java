@@ -41,12 +41,16 @@ public class TransactionManager {
     
     public static boolean buyTicket(Users user, Tickets ticket) throws Exception {
         boolean buying = false;
-        if (TransactionManager.hasBalance(user) && TransactionManager.isValidTicket(ticket)) {
-            TicketsModel tm = new TicketsModel();
-            if (tm.createTickets(ticket)) {
-                user = TransactionManager.discountWallet(user);
-                UsersModel um = new UsersModel();
-                buying = um.updateUsers(user);
+        if (TransactionManager.hasBalance(user)) {
+            if (TransactionManager.isValidTicket(ticket)) {
+                TicketsModel tm = new TicketsModel();
+                if (tm.createTickets(ticket)) {
+                    user = TransactionManager.discountWallet(user);
+                    UsersModel um = new UsersModel();
+                    buying = um.updateUsers(user);
+                }
+            } else {
+                throw new Exception("Ticket inválido, secuencia de números ocupada");
             }
             
         } else {
@@ -57,12 +61,14 @@ public class TransactionManager {
     
     public static boolean isValidTicket(Tickets ticket) {
         boolean isValid = false;
+        TicketsModel ticketsModel = new TicketsModel();
         isValid = ticket.getNumber1().compareTo(BigDecimal.valueOf(0.0)) == 1
             && ticket.getNumber2().compareTo(BigDecimal.valueOf(0.0)) == 1
             && ticket.getNumber3().compareTo(BigDecimal.valueOf(0.0)) == 1
             && ticket.getNumber4().compareTo(BigDecimal.valueOf(0.0)) == 1
             && ticket.getNumber5().compareTo(BigDecimal.valueOf(0.0)) == 1
-            && ticket.getNumber6().compareTo(BigDecimal.valueOf(0.0)) == 1;
+            && ticket.getNumber6().compareTo(BigDecimal.valueOf(0.0)) == 1
+            && ticketsModel.checkTicket(ticket);
         return isValid;
     }
     

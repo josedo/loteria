@@ -84,46 +84,48 @@
         <section style="height: auto;" class="sidebar">
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
+            <ul class="sidebar-menu tree" data-widget="tree">
                 <li class="header">Navegación</li>
                 <c:forEach items="${pageList}" var="objPage">
                     <c:if test="${objPage.parent==0}">
                         <c:choose>
                             <c:when test="${objPage.url=='#'}">
-                            <li class="treeview">
-                                <a href="${objPage.url}">
-                                    <i class="fa ${objPage.icon}"></i>
-                                    <span>${objPage.name}</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <c:forEach items="${pageList}" var="objPageChild">
-                                        <li>
-                                        <c:if test="${objPageChild.id!=0 && objPage.id == objPageChild.parent}">
-                                            <c:choose>
-                                                <c:when test="${objPageChild.url=='#'}">
-                                                    <a href="${objPageChild.url}">
-                                                        <i class="fa ${objPageChild.icon}"></i>
-                                                        <span>${objPageChild.name}</span>
-                                                        <i class="fa fa-angle-left pull-right"></i>
-                                                    </a>
-                                                    <ul class="treeview-menu">
-                                                        <c:forEach items="${pageList}" var="objPageSubChild">
-                                                            <c:if test="${objPageSubChild.id!=0 && objPageChild.id == objPageSubChild.parent}">
-                                                                <li><a href="${objPageSubChild.url}"><i class="fa ${objPageSubChild.icon}"></i> ${objPageSubChild.name}</a></li>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </ul>
-                                                 </c:when>
-                                                <c:otherwise>
-                                                    <a href="${objPageChild.url}"><i class="fa ${objPageChild.icon}"></i> ${objPageChild.name}</a>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </li>
-                                        </c:if>
-                                    </c:forEach>
-                                </ul>
-                            </li>
+                                <li class="treeview">
+                                    <a href="${objPage.url}">
+                                        <i class="fa ${objPage.icon}"></i>
+                                        <span>${objPage.name}</span>
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <c:forEach items="${pageList}" var="objPageChild">
+                                            <c:if test="${objPageChild.id!=0 && objPage.id == objPageChild.parent}">
+                                                <li class="treeview">
+                                                    <c:choose>
+                                                        <c:when test="${objPageChild.url=='#'}">
+                                                            <a href="${objPageChild.url}">
+                                                                <i class="fa ${objPageChild.icon}"></i>
+                                                                <span>${objPageChild.name}</span>
+                                                                <span class="pull-right-container">
+                                                                    <i class="fa fa-angle-left pull-right"></i>
+                                                                </span>
+                                                            </a>
+                                                            <ul class="treeview-menu">
+                                                                <c:forEach items="${pageList}" var="objPageSubChild">
+                                                                    <c:if test="${objPageSubChild.id!=0 && objPageChild.id == objPageSubChild.parent}">
+                                                                        <li><a href="${objPageSubChild.url}"><i class="fa ${objPageSubChild.icon}"></i> ${objPageSubChild.name}</a></li>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </ul>
+                                                         </c:when>
+                                                        <c:otherwise>
+                                                            <a href="${objPageChild.url}"><i class="fa ${objPageChild.icon}"></i> ${objPageChild.name}</a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </li>
+                                            </c:if>
+                                        </c:forEach>
+                                    </ul>
+                                </li>
                             </c:when>
                             <c:otherwise>
                                 <li><a href="${objPage.url}"><i class="fa ${objPage.icon}"></i> ${objPage.name}</a></li>
