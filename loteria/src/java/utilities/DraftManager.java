@@ -6,7 +6,16 @@
 package utilities;
 
 import entities.Drafts;
+import entities.Payment;
 import entities.Tickets;
+import entities.Users;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.Set;
+import model.DraftsModel;
+import model.TicketsModel;
 
 /**
  *
@@ -38,7 +47,62 @@ public class DraftManager {
         return (count/total) * 100;
     }
     
-    public static boolean isWinner(Tickets ticket) {
-        return DraftManager.successRate(ticket) == 100;
+    public static void makeDraft() {
+        DraftsModel draftsModel = new DraftsModel();
+        int[] draftNumbers = new int[6];
+        ArrayList numbers = new ArrayList();
+        for (int i = 1; i < 100; i++) {
+            numbers.add(i);
+        }
+        for (int i = 0; i < draftNumbers.length; i++) {
+            int random = (int)(Math.random() * (numbers.size() - 1) + 1) + 1;
+            draftNumbers[i] = (int)numbers.get(random);
+            numbers.remove(random);
+        }
+        java.util.Date date = Calendar.getInstance().getTime();
+        
+        Drafts draft = draftsModel.getPendingDrafts();
+        draft.setNumber1(BigDecimal.valueOf(draftNumbers[0]));
+        draft.setNumber2(BigDecimal.valueOf(draftNumbers[1]));
+        draft.setNumber3(BigDecimal.valueOf(draftNumbers[2]));
+        draft.setNumber4(BigDecimal.valueOf(draftNumbers[3]));
+        draft.setNumber5(BigDecimal.valueOf(draftNumbers[4]));
+        draft.setNumber6(BigDecimal.valueOf(draftNumbers[5]));
+        draft.setDate(date);
+        draftsModel.updateDrafts(draft);
+        
+        Drafts newDraft = new Drafts(BigDecimal.ZERO, date, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+        draftsModel.createDrafts(newDraft);
+        checkWinners(draft);
+    }
+    
+    public static void checkWinners(Drafts draft){
+        Set<Tickets> tickets = draft.getTicketses();
+        
+        for (int i = 0; i < tickets.size(); i++) {
+            
+        }
+    }
+    
+    public static void setPrize(){
+        
+    }
+    
+    public static void buyRandomTicket(Users user, Payment payment){
+        DraftsModel draftsModel = new DraftsModel();
+        TicketsModel ticketsModel = new TicketsModel();
+        int[] draftNumbers = new int[6];
+        ArrayList numbers = new ArrayList();
+        for (int i = 1; i < 100; i++) {
+            numbers.add(i);
+        }
+        for (int i = 0; i < draftNumbers.length; i++) {
+            int random = (int)(Math.random() * (numbers.size() - 1) + 1) + 1;
+            draftNumbers[i] = (int)numbers.get(random);
+            numbers.remove(random);
+        }
+        Drafts draft = draftsModel.getPendingDrafts();
+        Tickets ticket = new Tickets(BigDecimal.ZERO, draft, payment, user, BigDecimal.valueOf(draftNumbers[0]), BigDecimal.valueOf(draftNumbers[1]), BigDecimal.valueOf(draftNumbers[2]), BigDecimal.valueOf(draftNumbers[3]), BigDecimal.valueOf(draftNumbers[4]), BigDecimal.valueOf(draftNumbers[5]));
+        ticketsModel.createTickets(ticket);
     }
 }
