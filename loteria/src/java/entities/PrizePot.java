@@ -1,5 +1,5 @@
 package entities;
-// Generated 06-jul-2017 0:44:31 by Hibernate Tools 4.3.1
+// Generated 07-07-2017 11:51:38 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -43,6 +43,7 @@ public class PrizePot  implements java.io.Serializable {
                 ",\"pot\": \"" + pot + '"' +
                 "}}";
     }
+
 
 
 }

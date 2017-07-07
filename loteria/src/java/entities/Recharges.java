@@ -1,5 +1,5 @@
 package entities;
-// Generated 05-07-2017 11:24:52 by Hibernate Tools 4.3.1
+// Generated 07-07-2017 11:51:38 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -63,6 +63,7 @@ public class Recharges  implements java.io.Serializable {
                 ",\"amount\": \"" + amount + '"' +
                 "}}";
     }
+
 
 
 }

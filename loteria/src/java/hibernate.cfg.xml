@@ -7,16 +7,15 @@
     <property name="hibernate.connection.username">loteria</property>
     <property name="hibernate.connection.password">123</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="entities/Payment.hbm.xml"/>
-    <mapping resource="entities/ProfilesPages.hbm.xml"/>
-    <mapping resource="entities/Recharges.hbm.xml"/>
-    <mapping resource="entities/Tickets.hbm.xml"/>
-    <mapping resource="entities/Transactions.hbm.xml"/>
-    <mapping resource="entities/Winners.hbm.xml"/>
     <mapping resource="entities/Profiles.hbm.xml"/>
-    <mapping resource="entities/PrizePot.hbm.xml"/>
-    <mapping resource="entities/Drafts.hbm.xml"/>
+    <mapping resource="entities/ProfilesPages.hbm.xml"/>
+    <mapping resource="entities/Tickets.hbm.xml"/>
     <mapping resource="entities/Pages.hbm.xml"/>
     <mapping resource="entities/Users.hbm.xml"/>
+    <mapping resource="entities/Drafts.hbm.xml"/>
+    <mapping resource="entities/Recharges.hbm.xml"/>
+    <mapping resource="entities/Transactions.hbm.xml"/>
+    <mapping resource="entities/Winners.hbm.xml"/>
+    <mapping resource="entities/PrizePot.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

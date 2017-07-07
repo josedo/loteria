@@ -1,5 +1,5 @@
 package entities;
-// Generated 05-07-2017 11:24:52 by Hibernate Tools 4.3.1
+// Generated 07-07-2017 11:51:38 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -12,7 +12,6 @@ public class Tickets  implements java.io.Serializable {
 
      private BigDecimal id;
      private Drafts drafts;
-     private Payment payment;
      private Users users;
      private BigDecimal number1;
      private BigDecimal number2;
@@ -24,10 +23,9 @@ public class Tickets  implements java.io.Serializable {
     public Tickets() {
     }
 
-    public Tickets(BigDecimal id, Drafts drafts, Payment payment, Users users, BigDecimal number1, BigDecimal number2, BigDecimal number3, BigDecimal number4, BigDecimal number5, BigDecimal number6) {
+    public Tickets(BigDecimal id, Drafts drafts, Users users, BigDecimal number1, BigDecimal number2, BigDecimal number3, BigDecimal number4, BigDecimal number5, BigDecimal number6) {
        this.id = id;
        this.drafts = drafts;
-       this.payment = payment;
        this.users = users;
        this.number1 = number1;
        this.number2 = number2;
@@ -50,13 +48,6 @@ public class Tickets  implements java.io.Serializable {
     
     public void setDrafts(Drafts drafts) {
         this.drafts = drafts;
-    }
-    public Payment getPayment() {
-        return this.payment;
-    }
-    
-    public void setPayment(Payment payment) {
-        this.payment = payment;
     }
     public Users getUsers() {
         return this.users;
@@ -112,7 +103,6 @@ public class Tickets  implements java.io.Serializable {
     public String toString() {
         return "{\"data\": {" + 
                 "\"id\": \"" + id.intValueExact() + '"' +
-                ",\"payment\": \"" + payment.getId() + '"' +
                 ",\"user\": \"" + users.getId() + '"' +
                 ",\"draft\": \"" + drafts.getId() + '"' +
                 ",\"number1\": \"" + number1 + '"' +
@@ -123,6 +113,7 @@ public class Tickets  implements java.io.Serializable {
                 ",\"number6\": \"" + number6 + '"' +
                 "}}";
     }
+
 
 
 }

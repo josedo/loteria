@@ -1,5 +1,5 @@
 package entities;
-// Generated 05-07-2017 11:24:52 by Hibernate Tools 4.3.1
+// Generated 07-07-2017 11:51:38 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -16,7 +16,6 @@ public class Transactions  implements java.io.Serializable {
      private String paymentMethod;
      private BigDecimal amount;
      private Set rechargeses = new HashSet(0);
-     private Set payments = new HashSet(0);
 
     public Transactions() {
     }
@@ -27,12 +26,11 @@ public class Transactions  implements java.io.Serializable {
         this.paymentMethod = paymentMethod;
         this.amount = amount;
     }
-    public Transactions(BigDecimal id, String paymentMethod, BigDecimal amount, Set rechargeses, Set payments) {
+    public Transactions(BigDecimal id, String paymentMethod, BigDecimal amount, Set rechargeses) {
        this.id = id;
        this.paymentMethod = paymentMethod;
        this.amount = amount;
        this.rechargeses = rechargeses;
-       this.payments = payments;
     }
    
     public BigDecimal getId() {
@@ -63,13 +61,7 @@ public class Transactions  implements java.io.Serializable {
     public void setRechargeses(Set rechargeses) {
         this.rechargeses = rechargeses;
     }
-    public Set getPayments() {
-        return this.payments;
-    }
-    
-    public void setPayments(Set payments) {
-        this.payments = payments;
-    }
+
 
     @Override
     public String toString() {

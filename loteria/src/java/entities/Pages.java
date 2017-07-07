@@ -1,5 +1,5 @@
 package entities;
-// Generated 05-07-2017 11:24:52 by Hibernate Tools 4.3.1
+// Generated 07-07-2017 11:51:38 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -11,15 +11,17 @@ import java.util.Set;
  */
 public class Pages  implements java.io.Serializable {
 
-    private BigDecimal id;
-    private String name;
-    private String url;
-    private String icon;
-    private BigDecimal parent;
-    private Set profilesPageses = new HashSet(0);
+
+     private BigDecimal id;
+     private String name;
+     private String url;
+     private String icon;
+     private BigDecimal parent;
+     private Set profilesPageses = new HashSet(0);
 
     public Pages() {
     }
+
 	
     public Pages(BigDecimal id, String name, String url, String icon, BigDecimal parent) {
         this.id = id;
@@ -28,7 +30,6 @@ public class Pages  implements java.io.Serializable {
         this.icon = icon;
         this.parent = parent;
     }
-    
     public Pages(BigDecimal id, String name, String url, String icon, BigDecimal parent, Set profilesPageses) {
        this.id = id;
        this.name = name;
@@ -91,6 +92,8 @@ public class Pages  implements java.io.Serializable {
                 ",\"parent\": \"" + parent.intValueExact() + '"' +
                 "}}";
     }
+
+
 
 }
 

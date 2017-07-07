@@ -1,5 +1,5 @@
 package entities;
-// Generated 05-07-2017 11:24:52 by Hibernate Tools 4.3.1
+// Generated 07-07-2017 11:51:38 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -53,7 +53,7 @@ public class Winners  implements java.io.Serializable {
     public void setPrize(BigDecimal prize) {
         this.prize = prize;
     }
-    
+
     @Override
     public String toString() {
         return "{\"data\": {" + 
