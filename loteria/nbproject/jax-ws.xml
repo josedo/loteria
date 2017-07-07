@@ -5,7 +5,7 @@
     <client name="Payment">
       <wsdl-url>http://localhost:8080/Payment/Payment?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8080/Payment/Payment.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">service</package-name>
+      <package-name forceReplace="true">services</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -34,7 +34,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>service</wsimport-option-value>
+          <wsimport-option-value>services</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

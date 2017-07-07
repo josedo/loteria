@@ -69,6 +69,7 @@
         </property>
     </bean>
     
+    <bean name="indexController" class="controllers.IndexController"/>
     <bean name="loginController" class="controllers.LoginController"/>
     <bean name="profileController" class="controllers.ProfileController"/>
     <bean name="usersController" class="controllers.maintainers.UsersController"/>
@@ -79,12 +80,5 @@
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
-
-    <!--
-    The index controller.
-    -->
-    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />
 
 </beans>

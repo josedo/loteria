@@ -12,7 +12,7 @@
             <div class="pull-right hidden-xs">
                 <b>Version</b> 1.0.0
             </div>
-            <strong>Copyright © 2016-2017 <a href="http://espacioadmin.cl">EspacioADMIN</a>.</strong> Todo los Derechos Reservados.
+            <strong>Copyright © 2016-2017 <a href="http://localhost:8080/index.htm">LOTERIA</a>.</strong> Todo los Derechos Reservados.
         </footer>
         <jsp:include page="sidebar.jsp" />
         </div>

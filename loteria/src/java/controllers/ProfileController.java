@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
-import model.UsersModel;
 import org.springframework.stereotype.Controller;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -77,6 +76,30 @@ public class ProfileController {
             return null;
         }
         
+    }
+    
+    @RequestMapping(value = {"buyTicket.htm"}, method = RequestMethod.POST)
+    public ModelAndView get(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        ModelAndView mav = new ModelAndView();
+        String json = "{\"response\":0}";
+        if (this.validateSession(session)) {
+            BigDecimal number1 = BigDecimal.valueOf(Double.parseDouble(request.getParameter("num1")));
+            BigDecimal number2 = BigDecimal.valueOf(Double.parseDouble(request.getParameter("num2")));
+            BigDecimal number3 = BigDecimal.valueOf(Double.parseDouble(request.getParameter("num3")));
+            BigDecimal number4 = BigDecimal.valueOf(Double.parseDouble(request.getParameter("num4")));
+            BigDecimal number5 = BigDecimal.valueOf(Double.parseDouble(request.getParameter("num5")));
+            BigDecimal number6 = BigDecimal.valueOf(Double.parseDouble(request.getParameter("num6")));
+            Drafts draft = this.drafts.getActualDrafts();
+            Tickets ticket = new Tickets
+        } else {
+            json = "{\"response\":0, \"msg\":\"Sesión caducada, favor de reiniciar la página actual.\"}";
+        }
+            mav.addObject("json", json);
+        
+        mav.setViewName("include/json");
+        return mav;
     }
     
     private boolean validateSession(HttpSession session) throws IOException {

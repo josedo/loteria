@@ -73,7 +73,7 @@
     }
     
     var countNumbersTicket = 0;
-    var numbers = [];
+    var numbers = {};
     $('.numberTicket').change(function() {
         if ($(this).prop('checked')) {
             if (countNumbersTicket >= 6){
@@ -84,12 +84,12 @@
                     type: "error"
                 });
             }
-            numbers[$(this).val()] = $(this).val();
+            numbers['num' + $(this).val()] = $(this).val();
             countNumbersTicket++;
         } else {
             if (countNumbersTicket > 0) {
                 countNumbersTicket--;
-                delete numbers[$(this).val()];
+                delete numbers['num' + $(this).val()];
             }
                 
         }
@@ -101,11 +101,19 @@
     
     $('#confirmTicket').on('click', function () {
         if (countNumbersTicket === 6) {
-            var data = sigecoApp.dataFormMantenedor();
+            var data = {};
             var url = $(this).attr('data-url');
+            var dataNum = '';
+            var count = 1;
+            for (var num in numbers) {
+                dataNum += ' ' + numbers[num];
+                data['num' + count] = numbers[num];
+                ++count;
+            }
+            
             swal({
                 title: 'Comprar Ticket',
-                text: 'Está seguro de la selección realizada?\nNúmeros elegidos ' + numbers.toString(),
+                text: 'Está seguro de la selección realizada?\nNúmeros elegidos' + dataNum,
                 type: "warning",
                 showCancelButton: true,
                 closeOnConfirm: false,
