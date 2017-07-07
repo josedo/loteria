@@ -57,7 +57,8 @@ public class ProfilesPagesModel extends Model{
     public boolean createProfiles(final ProfilesPages objProfilesPages){        
         boolean insert = false;
         try {
-            objProfilesPages.setId(this.nextId(ProfilesPages.class));
+            BigDecimal id = this.nextId(ProfilesPages.class);
+            objProfilesPages.setId((id != null ? id : BigDecimal.ONE));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {

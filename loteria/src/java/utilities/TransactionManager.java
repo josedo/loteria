@@ -9,7 +9,6 @@ import entities.Tickets;
 import entities.Users;
 import java.math.BigDecimal;
 import javax.xml.ws.WebServiceRef;
-import model.PaymentModel;
 import model.TicketsModel;
 import model.UsersModel;
 import services.Payment;

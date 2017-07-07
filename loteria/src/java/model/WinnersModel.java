@@ -39,7 +39,8 @@ public class WinnersModel extends Model{
     public boolean createWinners(final Winners objWinners){        
         boolean insert = false;
         try {
-            objWinners.setId(this.nextId(Winners.class));
+            BigDecimal id = this.nextId(Winners.class);
+            objWinners.setId((id != null ? id : BigDecimal.ONE));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {

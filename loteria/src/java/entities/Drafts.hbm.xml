@@ -9,7 +9,7 @@
             <generator class="assigned" />
         </id>
         <property name="date" type="date">
-            <column name="date" length="7" not-null="true" />
+            <column name="DATE_DRAFT" length="7" not-null="true" />
         </property>
         <property name="number1" type="big_decimal">
             <column name="NUMBER_1" precision="22" scale="0" not-null="true" />

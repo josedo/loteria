@@ -38,7 +38,8 @@ public class RechargesModel extends Model{
     public boolean createRecharges(final Recharges objRecharges){        
         boolean insert = false;
         try {
-            objRecharges.setId(this.nextId(Recharges.class));
+            BigDecimal id = this.nextId(Recharges.class);
+            objRecharges.setId((id != null ? id : BigDecimal.ONE));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {

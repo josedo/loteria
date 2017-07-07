@@ -38,7 +38,8 @@ public class DraftsModel extends Model{
     public boolean createDrafts(final Drafts objDrafts){        
         boolean insert = false;
         try {
-            objDrafts.setId(this.nextId(Drafts.class));
+            BigDecimal id = this.nextId(Drafts.class);
+            objDrafts.setId((id != null ? id : BigDecimal.ONE));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {

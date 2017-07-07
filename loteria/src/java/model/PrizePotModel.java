@@ -38,7 +38,8 @@ public class PrizePotModel extends Model{
     public boolean createPrizePot(final PrizePot objPrizePot){        
         boolean insert = false;
         try {
-            objPrizePot.setId(this.nextId(PrizePot.class));
+            BigDecimal id = this.nextId(PrizePot.class);
+            objPrizePot.setId((id != null ? id : BigDecimal.ONE));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {

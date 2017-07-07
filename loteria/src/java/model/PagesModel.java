@@ -38,7 +38,8 @@ public class PagesModel extends Model {
     public boolean createPages(final Pages objPages){
         boolean insert = false;
         try {
-            objPages.setId(this.nextId(Pages.class));
+            BigDecimal id = this.nextId(Pages.class);
+            objPages.setId((id != null ? id : BigDecimal.ONE));
             insert = (Boolean) this.executeQuery(new Callable<Object>() {
                 @Override
                 public Boolean call() throws Exception {

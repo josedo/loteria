@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import utilities.DraftManager;
+import utilities.TransactionManager;
 
 @Controller
 @SessionAttributes
@@ -92,9 +93,16 @@ public class ProfileController {
             BigDecimal number5 = BigDecimal.valueOf(Double.parseDouble(request.getParameter("num5")));
             BigDecimal number6 = BigDecimal.valueOf(Double.parseDouble(request.getParameter("num6")));
             Drafts draft = this.drafts.getActualDrafts();
-            Tickets ticket = new Tickets
+            Tickets ticket = new Tickets(BigDecimal.ZERO, draft, userSession, number1, number2, number3, number4, number5, number6);
+            try {
+                if (TransactionManager.buyTicket(userSession, ticket)) {
+                    json = "{\"response\":1}";
+                }
+            } catch (Exception ex) {
+                json = "{\"response\":0, \"msg\":\"" + ex.getMessage() + ".\"}";
+            }
         } else {
-            json = "{\"response\":0, \"msg\":\"Sesión caducada, favor de reiniciar la página actual.\"}";
+            json = "{\"response\":0, \"msg\":\"Debe logearse para realizar compra de ticket.\"}";
         }
             mav.addObject("json", json);
         

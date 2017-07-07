@@ -35,6 +35,7 @@
                 |
                 -->
                 <prop key="perfil.htm">profileController</prop>
+                <prop key="buyTicket.htm">profileController</prop>
                 
                 <!--
                 |

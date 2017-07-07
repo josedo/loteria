@@ -40,7 +40,8 @@ public class TicketsModel extends Model{
     public boolean createTickets(final Tickets objTickets){        
         boolean insert = false;
         try {
-            objTickets.setId(this.nextId(Tickets.class));
+            BigDecimal id = this.nextId(Tickets.class);
+            objTickets.setId((id != null ? id : BigDecimal.ONE));
             this.executeQuery(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {

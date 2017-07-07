@@ -95,6 +95,13 @@
         }
     });
     
+    $('#buyTicket').on('click', function () {
+        $('.numberTicket').bootstrapToggle('off');
+        countNumbersTicket = 0;
+        numbers = {};
+        $('#newTicket').modal('show');
+    });
+    
     $('#cancelTicket').on('click', function() {
         $('.numberTicket').bootstrapToggle('off');
     });
@@ -224,10 +231,6 @@
     $('#newItem').on('click', function () {
         sigecoApp.clearFormMantanedor();
         $('#new').modal('show');
-    });
-    
-    $('#buyTicket').on('click', function () {
-        $('#newTicket').modal('show');
     });
 
     $('#addNew').on('click', function () {

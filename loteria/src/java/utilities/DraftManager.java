@@ -6,16 +6,15 @@
 package utilities;
 
 import entities.Drafts;
-import entities.Payment;
 import entities.Tickets;
 import entities.Users;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.Set;
 import model.DraftsModel;
 import model.TicketsModel;
+import services.Payment;
 
 /**
  *
@@ -88,7 +87,7 @@ public class DraftManager {
         
     }
     
-    public static void buyRandomTicket(Users user, Payment payment){
+    public static void buyRandomTicket(Users user){
         DraftsModel draftsModel = new DraftsModel();
         TicketsModel ticketsModel = new TicketsModel();
         int[] draftNumbers = new int[6];
@@ -102,7 +101,7 @@ public class DraftManager {
             numbers.remove(random);
         }
         Drafts draft = draftsModel.getPendingDrafts();
-        Tickets ticket = new Tickets(BigDecimal.ZERO, draft, payment, user, BigDecimal.valueOf(draftNumbers[0]), BigDecimal.valueOf(draftNumbers[1]), BigDecimal.valueOf(draftNumbers[2]), BigDecimal.valueOf(draftNumbers[3]), BigDecimal.valueOf(draftNumbers[4]), BigDecimal.valueOf(draftNumbers[5]));
+        Tickets ticket = new Tickets(BigDecimal.ZERO, draft, user, BigDecimal.valueOf(draftNumbers[0]), BigDecimal.valueOf(draftNumbers[1]), BigDecimal.valueOf(draftNumbers[2]), BigDecimal.valueOf(draftNumbers[3]), BigDecimal.valueOf(draftNumbers[4]), BigDecimal.valueOf(draftNumbers[5]));
         ticketsModel.createTickets(ticket);
     }
 }
