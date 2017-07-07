@@ -73,6 +73,7 @@
     }
     
     var countNumbersTicket = 0;
+    var numbers = [];
     $('.numberTicket').change(function() {
         if ($(this).prop('checked')) {
             if (countNumbersTicket >= 6){
@@ -80,13 +81,17 @@
                 swal({
                     title: "Límite alcanzado!",
                     text: "Sólo puede seleccionar un máximo de 6 números.",
-                    type: "warning"
+                    type: "error"
                 });
             }
+            numbers[$(this).val()] = $(this).val();
             countNumbersTicket++;
         } else {
-            if (countNumbersTicket > 0)
+            if (countNumbersTicket > 0) {
                 countNumbersTicket--;
+                delete numbers[$(this).val()];
+            }
+                
         }
     });
     
@@ -100,7 +105,7 @@
             var url = $(this).attr('data-url');
             swal({
                 title: 'Comprar Ticket',
-                text: 'Está seguro de la selección realizada?',
+                text: 'Está seguro de la selección realizada?\nNúmeros elegidos ' + numbers.toString(),
                 type: "warning",
                 showCancelButton: true,
                 closeOnConfirm: false,
@@ -328,8 +333,6 @@
             $('.form').find('.form-control').each(function () {
                 if ($(this).parent('[class*="icheckbox"]').length>0)
                     data += '&' + $(this).attr('name') + '=' + ($(this).parent('[class*="icheckbox"]').hasClass("checked")?1:0);
-                else if ($(this).parent('[class*="toogle"]').length>0 && !$(this).parent().hasClass('off'))
-                    data += '&' + $(this).attr('name') + '=' + $(this).val();
                 else
                     data += '&' + $(this).attr('name') + '=' + $(this).val();
             });

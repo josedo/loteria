@@ -32,20 +32,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import utilities.DraftManager;
-import utilities.TransactionManager;
 
 @Controller
 @SessionAttributes
 public class ProfileController {
     
-    private UsersModel users;
     private PrizePotModel prizePot;
     private TicketsModel tickets;
     private DraftsModel drafts;
     private Users userSession;
 
     public ProfileController() {
-        this.users = new UsersModel();
         this.prizePot = new PrizePotModel();
         this.tickets = new TicketsModel();
         this.drafts = new DraftsModel();
@@ -66,7 +63,6 @@ public class ProfileController {
                 Drafts lastDraft = ticket.getDrafts();
                 mav.addObject("lastDraft", lastDraft);
             }
-            System.out.println(TransactionManager.makeTransaction("", ""));
             Drafts actualDrafts = this.drafts.getActualDrafts();
             float succesRate = DraftManager.successRate(ticket);
             mav.addObject("succesRate", succesRate);

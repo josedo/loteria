@@ -140,21 +140,19 @@
                         <h4 class="modal-title">Comprar Ticket</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <c:forEach begin="1" end="99" varStatus="loop">
-                                        <input class="numberTicket form-control" name="num${loop.index}" data-size="small" data-toggle="toggle" data-on="${loop.index}" data-off="${loop.index}" type="checkbox" value="${loop.index}">
-                                        <c:if test="${loop.index%10 == 0}">
-                                                </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <c:forEach begin="1" end="99" varStatus="loop">
+                                    <input class="numberTicket" name="num${loop.index}" data-size="small" data-toggle="toggle" data-on="${loop.index}" data-off="${loop.index}" type="checkbox" value="${loop.index}">
+                                    <c:if test="${loop.index%10 == 0}">
                                             </div>
-                                            <div class="row" style="margin-top:5px;">
-                                                <div class="col-lg-12">
-                                        </c:if>
-                                    </c:forEach>
-                                </div>
+                                        </div>
+                                        <div class="row" style="margin-top:5px;">
+                                            <div class="col-lg-12">
+                                    </c:if>
+                                </c:forEach>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="cancelTicket">Cerrar</button>
