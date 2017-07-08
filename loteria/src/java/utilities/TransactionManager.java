@@ -5,11 +5,15 @@
  */
 package utilities;
 
+import entities.Recharges;
 import entities.Tickets;
+import entities.Transactions;
 import entities.Users;
 import java.math.BigDecimal;
 import javax.xml.ws.WebServiceRef;
+import model.RechargesModel;
 import model.TicketsModel;
+import model.TransactionsModel;
 import model.UsersModel;
 import services.Payment;
 import services.Payment_Service;
@@ -20,13 +24,13 @@ import services.Payment_Service;
  */
 public class TransactionManager {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/Payment/Payment.wsdl")
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_42724/Payment/Payment.wsdl")
     static Payment_Service paymentService = new Payment_Service();
     static final Payment PAYMENT = TransactionManager.paymentService.getPaymentPort();
     public static final BigDecimal TICKET_PRICE = BigDecimal.valueOf(1200.0);
     
-    public static int makeTransaction(String account, String mount) {
-        return TransactionManager.PAYMENT.transaction(account, mount);
+    public static int makeTransaction(String account, String amount) {
+        return TransactionManager.PAYMENT.transaction(account, amount);
     }
     
     public static boolean hasBalance(Users user) {
@@ -69,6 +73,26 @@ public class TransactionManager {
             && ticket.getNumber5().compareTo(BigDecimal.valueOf(0.0)) == 1
             && ticket.getNumber6().compareTo(BigDecimal.valueOf(0.0)) == 1
             && ticketsModel.checkTicket(ticket);
+        return isValid;
+    }
+    
+    public static boolean makeRecharge(Users user, BigDecimal amount, BigDecimal transaction, String payMethod) throws Exception {
+        boolean isValid = false;
+        TransactionsModel transactionsModel = new TransactionsModel();
+        RechargesModel rechargesModel = new RechargesModel();
+        Transactions transactions = new Transactions(transaction, payMethod, amount);
+        if (transactionsModel.createTransactions(transactions)) {
+            Recharges recharges = new Recharges(BigDecimal.ONE, transactions, user, amount);
+            if (rechargesModel.createRecharges(recharges)) {
+                UsersModel um = new UsersModel();
+                user.setWallet(user.getWallet().add(amount));
+                isValid = um.updateUsers(user);
+            } else {
+                throw new Exception("Error en la recarga. Comuníquese con el administrador.");
+            }
+        } else {
+            throw new Exception("Error en la transacción. Comuníquese con el administrador.");
+        }
         return isValid;
     }
     

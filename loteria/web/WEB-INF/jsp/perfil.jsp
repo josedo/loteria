@@ -49,7 +49,7 @@
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Abonar <i class="fa fa-usd"></i></a>
+                        <a href="#" class="small-box-footer recarga" data-url="/loteria/recharge.htm">Abonar <i class="fa fa-usd"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-5 col-xs-12">
@@ -71,7 +71,13 @@
                                 <i class="fa fa-money"></i> Comprar Ticket
                             </a>
                             <a class="btn btn-app bg-red">
-                                <i class="fa  fa-check-circle"></i> Revisar Ticket
+                                <i class="fa fa-check-circle"></i> Revisar Ticket
+                            </a>
+                            <a class="btn btn-app bg-green" id="recharge">
+                                <i class="fa fa-credit-card"></i> Recargar Saldo
+                            </a>
+                            <a data-url="/loteria/schedule.htm" class="btn btn-app bg-blue" id="schedule">
+                                <i class="fa fa-refresh"></i> Activar Sorteo
                             </a>
                         </div>
                     </div>
@@ -166,8 +172,53 @@
                         <button type="button" class="btn btn-default" id="randomTicket" data-url="/loteria/randomTicket.htm">Comprar Al Azar</button>
                         <button type="button" class="btn btn-success" id="confirmTicket" data-url="./buyTicket.htm">Comprar</button>
                     </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="rechargeModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Realizar Recarga</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form class="form-horizontal form" id="addForm">
+                                    <input class="form-control" name="id" id="id" type="hidden">
+                                    <div class="form-group">
+                                        <label for="account" class="col-sm-2 control-label">Cuenta</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" name="account" id="account" placeholder="Cuenta" type="text" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="amount" class="col-sm-2 control-label">Monto</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" name="amount" id="amount" placeholder="Monto" type="text" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="payMethod" class="col-sm-2 control-label">Medio de Pago</label>
+                                        <div class="col-sm-10">
+                                            <select name="payMethod" id="payMethod" class="form-control" style="width: 100%;">
+                                                <option value="credito">Tarjeta de Crédito</option>
+                                                <option value="debito">Tarjeta de Débito</option>
+                                                <option value="paypal">PayPal</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="cancelTicket">Cerrar</button>
+                        <button type="button" class="btn btn-success" id="confirmTicket" data-url="/loteria/recharge.htm">Recargar</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.content -->
     </jsp:body>

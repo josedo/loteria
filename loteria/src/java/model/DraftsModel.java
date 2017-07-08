@@ -7,9 +7,12 @@ package model;
 
 import entities.Drafts;
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import org.hibernate.Query;
 
 /**
  *
@@ -109,9 +112,24 @@ public class DraftsModel extends Model{
         Drafts draft = null;
         try {
             final BigDecimal id = this.MaxId(Drafts.class);
+            final Date date = Calendar.getInstance().getTime();
+            final BigDecimal zero = BigDecimal.ZERO;
             draft = (Drafts) this.executeQuery(new Callable<Object>() {
                 @Override
                 public Drafts call() throws Exception {
+                    String hql = "From Drafts as draft Where "
+                            + "draft.id = :id and "
+                            + "draft.date = :date and "
+                            + "draft.number1 = :zero and "
+                            + "draft.number2 = :zero and "
+                            + "draft.number3 = :zero and "
+                            + "draft.number4 = :zero and "
+                            + "draft.number5 = :zero and "
+                            + "draft.number6 = :zero";
+                    Query query = session.createQuery(hql);
+                    query.setParameter("id", id);
+                    query.setParameter("date", date);
+                    query.setParameter("zero", zero);
                     return (Drafts) session.get(Drafts.class, id);
                 }
             });

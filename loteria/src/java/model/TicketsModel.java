@@ -92,10 +92,10 @@ public class TicketsModel extends Model{
     }
     
     public Tickets getTickets(final BigDecimal id){
-        Tickets user = null;
+        Tickets tickets = null;
         
         try {
-            user = (Tickets) this.executeQuery(new Callable<Object>() {
+            tickets = (Tickets) this.executeQuery(new Callable<Object>() {
                 @Override
                 public Tickets call() throws Exception {
                     return (Tickets) session.get(Tickets.class, id);
@@ -105,7 +105,7 @@ public class TicketsModel extends Model{
             ex.printStackTrace();
         }
         
-        return user;
+        return tickets;
     }
     
     public List<Object> getByUser(final Users user, final Drafts draft){

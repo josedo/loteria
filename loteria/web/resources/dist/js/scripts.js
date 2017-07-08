@@ -106,6 +106,101 @@
         $('.numberTicket').bootstrapToggle('off');
     });
     
+    $('#recharge').on('click', function () {
+        $('#rechargeModal').modal('show');
+    });
+    
+    $('#schedule').on('click', function () {
+        var url = $(this).attr('data-url');
+
+        swal({
+            title: 'Realizar Sorteo',
+            text: 'Seguro de empezar sorteo?',
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            animation: 'slide-from-top',
+            showLoaderOnConfirm: true
+        },function () {
+            $.ajax({
+                url: url,
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    if (data.response === 1) {
+                        swal({
+                            title: "Sorteo exitoso!",
+                            text: "",
+                            type: "success"
+                        },
+                        function () {
+                            location.reload();
+                        });
+                    } else {
+                        swal({
+                            title: "Error al generar Sorteo!",
+                            text: data.msg || "Intente nuevamente.",
+                            type: "error"
+                        });
+                    }
+                },
+                error: function () {
+                    swal({
+                        title: "Error al generar Sorteo!",
+                        text: "Intente nuevamente.",
+                        type: "error"
+                    });
+                }
+            });
+        });
+    });
+    
+    $('#makeRecharge').on('click', function () {
+        var url = $(this).attr('data-url');
+        var data = sigecoApp.dataFormMantenedor();
+
+        swal({
+            title: 'Recarga de Saldo',
+            text: 'Seguro de realizar recarga?',
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            animation: 'slide-from-top',
+            showLoaderOnConfirm: true
+        },function () {
+            $.ajax({
+                url: url,
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    if (data.response === 1) {
+                        swal({
+                            title: "Recarga exitosa!",
+                            text: "",
+                            type: "success"
+                        },
+                        function () {
+                            location.reload();
+                        });
+                    } else {
+                        swal({
+                            title: "Error al generar Recarga!",
+                            text: data.msg || "Intente nuevamente.",
+                            type: "error"
+                        });
+                    }
+                },
+                error: function () {
+                    swal({
+                        title: "Error al generar Recarga!",
+                        text: "Intente nuevamente.",
+                        type: "error"
+                    });
+                }
+            });
+        });
+    });
+    
     $('#randomTicket').on('click', function () {
         var url = $(this).attr('data-url');
 

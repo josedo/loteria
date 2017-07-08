@@ -61,11 +61,14 @@ public class ProfileController {
             NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
             Drafts actualDrafts = this.drafts.getActualDrafts();
             List<Object> listTickets = this.tickets.getByUser(this.userSession, actualDrafts);
-            Tickets ticket = (Tickets) listTickets.get(listTickets.size() - 1);
+            Tickets ticket = null;
+            if (listTickets.size() > 0) 
+                ticket = (Tickets) listTickets.get(listTickets.size() - 1);
             if (ticket != null) {
                 Drafts lastDraft = ticket.getDrafts();
                 mav.addObject("lastDraft", lastDraft);
             }
+            
             mav.addObject("listTickets", listTickets);
             mav.addObject("actualDrafts", actualDrafts);
             mav.addObject("ticket", ticket);
@@ -94,9 +97,9 @@ public class ProfileController {
             BigDecimal number5 = BigDecimal.valueOf(Double.parseDouble(request.getParameter("num5")));
             BigDecimal number6 = BigDecimal.valueOf(Double.parseDouble(request.getParameter("num6")));
             Drafts draft = this.drafts.getActualDrafts();
-            Tickets ticket = new Tickets(BigDecimal.ZERO, draft, userSession, number1, number2, number3, number4, number5, number6);
+            Tickets ticket = new Tickets(BigDecimal.ZERO, draft, this.userSession, number1, number2, number3, number4, number5, number6);
             try {
-                if (TransactionManager.buyTicket(userSession, ticket)) {
+                if (TransactionManager.buyTicket(this.userSession, ticket)) {
                     json = "{\"response\":1}";
                 }
             } catch (Exception ex) {
@@ -120,7 +123,7 @@ public class ProfileController {
         if (this.validateSession(session)) {
             
             try {
-                if (DraftManager.buyRandomTicket(userSession)) {
+                if (DraftManager.buyRandomTicket(this.userSession)) {
                     json = "{\"response\":1}";
                 }
             } catch (Exception ex) {
@@ -129,6 +132,57 @@ public class ProfileController {
             
         } else {
             json = "{\"response\":0, \"msg\":\"Debe logearse para realizar compra de ticket.\"}";
+        }
+        
+        mav.addObject("json", json);
+        mav.setViewName("include/json");
+        return mav;
+    }
+    
+    @RequestMapping(value = {"recharge.htm"}, method = RequestMethod.POST)
+    public ModelAndView recharge(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        ModelAndView mav = new ModelAndView();
+        String json = "{\"response\":0}";
+        if (this.validateSession(session)) {
+            String account = request.getParameter("account");
+            String amount = request.getParameter("amount");
+            String payMethod = request.getParameter("amount");
+            try {
+                BigDecimal transaction = BigDecimal.valueOf(Double.parseDouble(String.valueOf(TransactionManager.makeTransaction(account, amount))));
+                if (TransactionManager.makeRecharge(userSession, BigDecimal.valueOf(Double.parseDouble(amount)), transaction, payMethod))
+                    json = "{\"response\":1}";
+            } catch (Exception e) {
+            json = "{\"response\":0, \"msg\":\"" + e.getMessage() +"\"}";
+            }
+                
+        } else {
+            json = "{\"response\":0, \"msg\":\"Debe logearse para realizar recarga.\"}";
+        }
+        
+        mav.addObject("json", json);
+        mav.setViewName("include/json");
+        return mav;
+    }
+    
+    @RequestMapping(value = {"schedule.htm"}, method = RequestMethod.POST)
+    public ModelAndView schedule(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        ModelAndView mav = new ModelAndView();
+        String json = "{\"response\":0}";
+        
+        if (this.validateSession(session)) {
+            try {
+                if (DraftManager.makeDraft())
+                    json = "{\"response\":1}";
+            } catch (Exception e) {
+                json = "{\"response\":0, \"msg\":\"" + e.getMessage() +"\"}";
+            }
+                
+        } else {
+            json = "{\"response\":0, \"msg\":\"Debe logearse para realizar recarga.\"}";
         }
         
         mav.addObject("json", json);

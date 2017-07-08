@@ -45,21 +45,6 @@
                                     <small>${user.username}</small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">link 1</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">link 2</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">link 3</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
@@ -99,7 +84,7 @@
                                     <ul class="treeview-menu">
                                         <c:forEach items="${pageList}" var="objPageChild">
                                             <c:if test="${objPageChild.id!=0 && objPage.id == objPageChild.parent}">
-                                                <li class="treeview">
+                                                <li>
                                                     <c:choose>
                                                         <c:when test="${objPageChild.url=='#'}">
                                                             <a href="${objPageChild.url}">
