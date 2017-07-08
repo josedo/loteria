@@ -62,6 +62,7 @@ public class ProfileController {
             Drafts actualDrafts = this.drafts.getActualDrafts();
             List<Object> listTickets = this.tickets.getByUser(this.userSession, actualDrafts);
             Tickets ticket = null;
+            
             if (listTickets.size() > 0) 
                 ticket = (Tickets) listTickets.get(listTickets.size() - 1);
             if (ticket != null) {
